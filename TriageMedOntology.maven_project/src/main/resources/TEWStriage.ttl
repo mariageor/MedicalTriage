@@ -1,0 +1,255 @@
+# baseURI: http://MedOntology.project.rdfs/TEWStriage
+# prefix: TEWStriage
+
+@prefix TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://MedOntology.project.rdfs/TEWStriage>
+  rdf:type owl:Ontology ;
+  spin:imports <http://topbraid.org/spin/rdfsplus> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+TEWStriage:AVPU
+  rdf:type rdfs:Class ;
+  rdfs:comment "AVPU scale is a system by which a health care professional can measure and record a patient's level of consciousness. It is mostly used in emergency medicine protocols, and within first aid." ;
+  rdfs:label "AVPU is the acronym of Awake-Verbal-Pain-Unresponsive scale." ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+TEWStriage:AVPUstateOfPatient
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property is used to store the patient's level in the AVPU scale." ;
+  rdfs:range TEWStriage:AVPU ;
+.
+TEWStriage:Awake
+  rdf:type rdfs:Class ;
+  rdfs:label "This class represents the state in which a patient is awake." ;
+  rdfs:subClassOf TEWStriage:AVPU ;
+.
+TEWStriage:Blue
+  rdf:type rdfs:Class ;
+  rdfs:label "This class represents colour code Blue of TEWS, which indicates that the patient is dead." ;
+  rdfs:subClassOf TEWStriage:TEWScolourCodes ;
+.
+TEWStriage:FemalePatient
+  rdf:type rdfs:Class ;
+  rdfs:label "This class represents a patient of female sex. (biological sex and not gender)." ;
+  rdfs:subClassOf TEWStriage:Patient ;
+.
+TEWStriage:Green
+  rdf:type rdfs:Class ;
+  rdfs:label "This class respresents colour code Green of TEWS, which indicates that the incident is non-urgent and the patient needs to be treated by a physician in less than 240 minutes/4 hours." ;
+  rdfs:subClassOf TEWStriage:TEWScolourCodes ;
+.
+TEWStriage:HR
+  rdf:type rdf:Property ;
+  rdfs:comment "Heart rate is measured in beats per minute." ;
+  rdfs:domain TEWStriage:VitalSigns ;
+  rdfs:label "Heart Rate" ;
+  rdfs:range xsd:integer ;
+.
+TEWStriage:MalePatient
+  rdf:type rdfs:Class ;
+  rdfs:label "This class represents a patient of male sex. (biological sex and not gender)." ;
+  rdfs:subClassOf TEWStriage:Patient ;
+.
+TEWStriage:Orange
+  rdf:type rdfs:Class ;
+  rdfs:label "This class respresents colour code Orange of TEWS, which indicates that the incident is emergent and the patient needs to be treated by a physician in less than 10 minutes." ;
+  rdfs:subClassOf TEWStriage:TEWScolourCodes ;
+.
+TEWStriage:Pain
+  rdf:type rdfs:Class ;
+  rdfs:label "This class represents the state in which a patient responses to pain." ;
+  rdfs:subClassOf TEWStriage:AVPU ;
+.
+TEWStriage:Patient
+  rdf:type rdfs:Class ;
+  rdfs:label "This class represents a patient." ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+TEWStriage:RR
+  rdf:type rdf:Property ;
+  rdfs:comment "Respiration rate is measured in breaths per minute." ;
+  rdfs:domain TEWStriage:VitalSigns ;
+  rdfs:label "Respiration Rate" ;
+  rdfs:range xsd:integer ;
+.
+TEWStriage:Red
+  rdf:type rdfs:Class ;
+  rdfs:label "This class respresents colour code Red of TEWS, which indicates that the patient needs immediate treatment by a physician." ;
+  rdfs:subClassOf TEWStriage:TEWScolourCodes ;
+.
+TEWStriage:SBP
+  rdf:type rdf:Property ;
+  rdfs:comment "Systolic blood pressure is measured in units of millimeters of mercury (mmHg)." ;
+  rdfs:domain TEWStriage:VitalSigns ;
+  rdfs:label "Systolic Blood Pressure" ;
+  rdfs:range xsd:integer ;
+.
+TEWStriage:TEWScodeOfPatient
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property represents the TEWS colour code of a patient." ;
+  rdfs:range TEWStriage:TEWScolourCodes ;
+.
+TEWStriage:TEWScolourCodes
+  rdf:type rdfs:Class ;
+  rdfs:comment """TEWS is a method of triage is a numerical 5- level method, which was designed 
+according to the experts’ opinion for the injured people over 12 years of age and 
+above the height of 150 centimeters. The injured person is placed in one of the 
+five classes of red, orange, yellow, green and blue by the final score.""" ;
+  rdfs:label "Triage Early Warning Score (TEWS)." ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+TEWStriage:TEWSscore
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property represents the TEWS score of a patient." ;
+  rdfs:range xsd:integer ;
+.
+TEWStriage:Unresponsive
+  rdf:type rdfs:Class ;
+  rdfs:label "This class represents the state in which a patient is unresponive, and is labeled as unconscious." ;
+  rdfs:subClassOf TEWStriage:AVPU ;
+.
+TEWStriage:VSp0
+  rdf:type TEWStriage:VitalSigns ;
+  TEWStriage:HR 70 ;
+  TEWStriage:RR 12 ;
+  TEWStriage:SBP 85 ;
+  TEWStriage:temperature 36.1 ;
+.
+TEWStriage:Verbal
+  rdf:type rdfs:Class ;
+  rdfs:label "This class represents the state in which a patient makes some kind of response, when someone talks to them." ;
+  rdfs:subClassOf TEWStriage:AVPU ;
+.
+TEWStriage:VitalSigns
+  rdf:type rdfs:Class ;
+  rdfs:comment "This class represents the vital signs of a patient and through the proper properties, it can save the measurements of the respirational rate, the heart rate, the systolic blood pressure and the temperature of a patient." ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+TEWStriage:Yellow
+  rdf:type rdfs:Class ;
+  rdfs:label "This class respresents colour code Yellow of TEWS, which indicates that the patient is potentially unstable and needs to be treated by a physician in less than 60 minutes/1 hour." ;
+  rdfs:subClassOf TEWStriage:TEWScolourCodes ;
+.
+TEWStriage:abilityOfMobility
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property represents the patients ability of mobility." ;
+  rdfs:range xsd:boolean ;
+.
+TEWStriage:ableToWalk
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property represents the ability of a patient to walk on his own." ;
+  rdfs:range xsd:boolean ;
+  rdfs:subPropertyOf TEWStriage:abilityOfMobility ;
+.
+TEWStriage:ageOfPatient
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property saves the age of a patient in years." ;
+  rdfs:range xsd:integer ;
+.
+TEWStriage:awake_p0
+  rdf:type TEWStriage:Awake ;
+.
+TEWStriage:deadPatient
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:range xsd:boolean ;
+.
+TEWStriage:existenceOfTrauma
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property indicates a trauma to a patient." ;
+  rdfs:range xsd:boolean ;
+.
+TEWStriage:externalTrauma
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property indicates the existence of an external trauma to a patient." ;
+  rdfs:range xsd:boolean ;
+  rdfs:subPropertyOf TEWStriage:existenceOfTrauma ;
+.
+TEWStriage:green_p0
+  rdf:type TEWStriage:Green ;
+.
+TEWStriage:internalTrauma
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property indicates the existence of an internal trauma to a patient." ;
+  rdfs:range xsd:boolean ;
+  rdfs:subPropertyOf TEWStriage:existenceOfTrauma ;
+.
+TEWStriage:monthsOfInfant
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property is used in case a patient is an infant and it's age is measured in months." ;
+  rdfs:range xsd:integer ;
+  rdfs:subPropertyOf TEWStriage:ageOfPatient ;
+.
+TEWStriage:needsHelpToWalk
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property represents the ability of a patient to walk only with help." ;
+  rdfs:range xsd:boolean ;
+  rdfs:subPropertyOf TEWStriage:abilityOfMobility ;
+.
+TEWStriage:p0
+  rdf:type TEWStriage:FemalePatient ;
+  TEWStriage:AVPUstateOfPatient TEWStriage:awake_p0 ;
+  TEWStriage:TEWScodeOfPatient TEWStriage:green_p0 ;
+  TEWStriage:TEWSscore 1 ;
+  TEWStriage:abilityOfMobility "true"^^xsd:boolean ;
+  TEWStriage:ableToWalk "true"^^xsd:boolean ;
+  TEWStriage:ageOfPatient 21 ;
+  TEWStriage:deadPatient "false"^^xsd:boolean ;
+  TEWStriage:existenceOfTrauma "false"^^xsd:boolean ;
+  TEWStriage:externalTrauma "false"^^xsd:boolean ;
+  TEWStriage:internalTrauma "false"^^xsd:boolean ;
+  TEWStriage:needsHelpToWalk "false"^^xsd:boolean ;
+  TEWStriage:patientsName "Maria Papanikolaou" ;
+  TEWStriage:psychologicalTrauma "false"^^xsd:boolean ;
+  TEWStriage:stretcherNeededOrImmobilePatient "false"^^xsd:boolean ;
+  TEWStriage:vitalSignsOfPatient TEWStriage:VSp0 ;
+.
+TEWStriage:patientsName
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property stores the name of a patient." ;
+  rdfs:range xsd:string ;
+.
+TEWStriage:psychologicalTrauma
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property indicates the existence of a psychological trauma to a patient." ;
+  rdfs:range xsd:boolean ;
+  rdfs:subPropertyOf TEWStriage:existenceOfTrauma ;
+.
+TEWStriage:stretcherNeededOrImmobilePatient
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property represents the inability of a patient to walk on his own, and that he needs a stretcher to be trasfered." ;
+  rdfs:range xsd:boolean ;
+  rdfs:subPropertyOf TEWStriage:abilityOfMobility ;
+.
+TEWStriage:temperature
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:VitalSigns ;
+  rdfs:label "This property represents the patient's temperature, measured in degrees of Celsius." ;
+  rdfs:range xsd:decimal ;
+.
+TEWStriage:vitalSignsOfPatient
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property links a patient with an instance of the class VitalSigns, in which there are all the information about his/hers RR, HR, SBP and temperature." ;
+  rdfs:range TEWStriage:VitalSigns ;
+.
