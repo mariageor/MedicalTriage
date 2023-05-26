@@ -54,6 +54,34 @@ public class MedicalTriage
 	{
 		System.out.println("Loading new instances...");
 		
+		try(JsonReader reader = new JsonReader(new FileReader("C://testPatient.json")))
+		{
+			JsonElement jsonElement = new JsonParser().parse(reader);
+			
+			ModelBuilder builder = new ModelBuilder();
+			builder.setNamespace("a", "http://MedOntology.project.rdfs/TEWStriage");
+			
+			ValueFactory factory = SimpleValueFactory.getInstance();
+
+			JsonObject jsonObject = jsonElement.getAsJsonObject();
+			//jsonObject = jsonObject.getAsJsonObject();
+			JsonArray jArray = jsonObject.getAsJsonArray();
+			
+			
+			for (int i = 0; i < jArray.size(); i++) 
+			{
+			    JsonObject jsonObject2 = jArray.get(i).getAsJsonObject();
+			    System.out.println(jsonObject2.toString()); 
+			}
+			    
+			//System.out.println(jsonObject.toString()); //just a check 
+			//System.out.println(jArray.toString());
+			//System.out.println(jArray.size());
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	
