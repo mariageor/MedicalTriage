@@ -40,55 +40,68 @@ public class MedicalTriage
 		this.connection = connection;
 	}
 	
-	
-	public void loadOntology() throws RDFParseException, RepositoryException, IOException {
+	/**
+	 * 
+	 * @throws RDFParseException
+	 * @throws RepositoryException
+	 * @throws IOException
+	 */
+	public void loadOntology() throws RDFParseException, RepositoryException, IOException 
+	{
 		System.out.println("Loading the ontology...");
     	
 		connection.begin();
 		
+		// Getting the turtle file of the ontology and adding it in the connection which was created
 		connection.add(MedicalTriage.class.getResourceAsStream("/TEWStriage.ttl"), "urn:base", RDFFormat.TURTLE);
 	}
 	
-	
+	/**
+	 * 
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 */
 	public void loadInstances() throws IOException, URISyntaxException
 	{
 		System.out.println("Loading new instances...");
 		
-		try(JsonReader reader = new JsonReader(new FileReader("C://testPatient.json")))
+		// Reading the json file, which includes patients data
+		try(JsonReader reader = new JsonReader(new FileReader("C://test2patients.json")))
 		{
 			JsonElement jsonElement = new JsonParser().parse(reader);
 			
+			// Creating an RDF model with the base URI of the ontology
 			ModelBuilder builder = new ModelBuilder();
 			builder.setNamespace("a", "http://MedOntology.project.rdfs/TEWStriage");
 			
+			// Generating an instance of RDF value 
 			ValueFactory factory = SimpleValueFactory.getInstance();
 
 			JsonObject jsonObject = jsonElement.getAsJsonObject();
-			//jsonObject = jsonObject.getAsJsonObject();
-			JsonArray jArray = jsonObject.getAsJsonArray();
+			//jsonObject = jsonObject.getAsJsonObject(); //it may be needed
+			JsonArray jArray = jsonObject.getAsJsonArray("patientsData");
 			
-			
+			// Accessing every json object of the json array
 			for (int i = 0; i < jArray.size(); i++) 
 			{
 			    JsonObject jsonObject2 = jArray.get(i).getAsJsonObject();
-			    System.out.println(jsonObject2.toString()); 
+			    System.out.println(jsonObject2.toString()); //just a check
 			}
-			    
-			//System.out.println(jsonObject.toString()); //just a check 
-			//System.out.println(jArray.toString());
-			//System.out.println(jArray.size());
+			
 		}
 		catch (Exception e) 
 		{
+			// General exception handler
 			e.printStackTrace();
 		}
+		
 	}
 	
 	
 	public static void main(String[] args) throws RDFParseException, UnsupportedRDFormatException, IOException, URISyntaxException
 	{
 		// Access to a remote repository accessible over HTTP
-		HTTPRepository repository = new HTTPRepository("http://localhost:7200/repositories/TriageDataBase");
+		HTTPRepository repository = new HTTPRepository("http://localhost:7200/repositories/TewsTriageDataBase");
 
 		// Separate connection to a repository
 		RepositoryConnection connection = repository.getConnection();
