@@ -4,9 +4,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
+import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.RepositoryException;
 import org.eclipse.rdf4j.repository.http.HTTPRepository;
@@ -68,11 +70,12 @@ public class MedicalTriage
 		// Reading the json file, which includes patients data
 		try(JsonReader reader = new JsonReader(new FileReader("C://test2patients.json")))
 		{
+			String namespace = "http://MedOntology.project.rdfs/TEWStriage";
 			JsonElement jsonElement = new JsonParser().parse(reader);
 			
 			// Creating an RDF model with the base URI of the ontology
 			ModelBuilder builder = new ModelBuilder();
-			builder.setNamespace("a", "http://MedOntology.project.rdfs/TEWStriage");
+			builder.setNamespace("a", namespace);
 			
 			// Generating an instance of RDF value 
 			ValueFactory factory = SimpleValueFactory.getInstance();
@@ -84,8 +87,26 @@ public class MedicalTriage
 			// Accessing every json object of the json array
 			for (int i = 0; i < jArray.size(); i++) 
 			{
-			    JsonObject jsonObject2 = jArray.get(i).getAsJsonObject();
-			    System.out.println(jsonObject2.toString()); //just a check
+			    JsonObject jObject = jArray.get(i).getAsJsonObject();
+			    System.out.println(jObject.toString()); //just a check
+			    
+			    IRI patientsIRI = factory.createIRI(namespace, "p" + (i+1));
+			    IRI dataIRI = factory.createIRI(namespace, "Data" + (i+1));
+			    //System.out.println(patientsIRI); //just a check
+			    //System.out.println(dataIRI); //just a check
+			    
+			    //Maybe I need to do a for loop inside this one cause inside the json file there is a list of 
+			    //json objects with other objects as well
+			    JsonElement nameElement = jsonObject.get("TEWStriage:patientsName");
+			    if (nameElement!=null) 
+			    {
+			    	String name = nameElement.getAsString();
+			        System.out.println("Name: " + name);
+			    }
+			    else 
+			    {
+			    	System.out.println("Name is null");
+			    }
 			}
 			
 		}
