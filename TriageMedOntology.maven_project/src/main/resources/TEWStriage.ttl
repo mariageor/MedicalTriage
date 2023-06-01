@@ -189,13 +189,6 @@ TEWStriage:internalTrauma
   rdfs:range xsd:boolean ;
   rdfs:subPropertyOf TEWStriage:existenceOfTrauma ;
 .
-TEWStriage:monthsOfInfant
-  rdf:type rdf:Property ;
-  rdfs:domain TEWStriage:Patient ;
-  rdfs:label "This property is used in case a patient is an infant and it's age is measured in months." ;
-  rdfs:range xsd:integer ;
-  rdfs:subPropertyOf TEWStriage:ageOfPatient ;
-.
 TEWStriage:needsHelpToWalk
   rdf:type rdf:Property ;
   rdfs:domain TEWStriage:Patient ;
