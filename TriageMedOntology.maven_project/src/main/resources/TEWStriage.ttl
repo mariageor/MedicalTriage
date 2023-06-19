@@ -145,13 +145,6 @@ TEWStriage:abilityOfMobility
   rdfs:label "This property represents the patients ability of mobility." ;
   rdfs:range xsd:boolean ;
 .
-TEWStriage:ableToWalk
-  rdf:type rdf:Property ;
-  rdfs:domain TEWStriage:Patient ;
-  rdfs:label "This property represents the ability of a patient to walk on his own." ;
-  rdfs:range xsd:boolean ;
-  rdfs:subPropertyOf TEWStriage:abilityOfMobility ;
-.
 TEWStriage:ageOfPatient
   rdf:type rdf:Property ;
   rdfs:domain TEWStriage:Patient ;
@@ -172,22 +165,8 @@ TEWStriage:existenceOfTrauma
   rdfs:label "This property indicates a trauma to a patient." ;
   rdfs:range xsd:boolean ;
 .
-TEWStriage:externalTrauma
-  rdf:type rdf:Property ;
-  rdfs:domain TEWStriage:Patient ;
-  rdfs:label "This property indicates the existence of an external trauma to a patient." ;
-  rdfs:range xsd:boolean ;
-  rdfs:subPropertyOf TEWStriage:existenceOfTrauma ;
-.
 TEWStriage:green_p0
   rdf:type TEWStriage:Green ;
-.
-TEWStriage:internalTrauma
-  rdf:type rdf:Property ;
-  rdfs:domain TEWStriage:Patient ;
-  rdfs:label "This property indicates the existence of an internal trauma to a patient." ;
-  rdfs:range xsd:boolean ;
-  rdfs:subPropertyOf TEWStriage:existenceOfTrauma ;
 .
 TEWStriage:needsHelpToWalk
   rdf:type rdf:Property ;
@@ -202,15 +181,11 @@ TEWStriage:p0
   TEWStriage:TEWScodeOfPatient TEWStriage:green_p0 ;
   TEWStriage:TEWSscore 1 ;
   TEWStriage:abilityOfMobility "true"^^xsd:boolean ;
-  TEWStriage:ableToWalk "true"^^xsd:boolean ;
   TEWStriage:ageOfPatient 21 ;
   TEWStriage:deadPatient "false"^^xsd:boolean ;
   TEWStriage:existenceOfTrauma "false"^^xsd:boolean ;
-  TEWStriage:externalTrauma "false"^^xsd:boolean ;
-  TEWStriage:internalTrauma "false"^^xsd:boolean ;
   TEWStriage:needsHelpToWalk "false"^^xsd:boolean ;
   TEWStriage:patientsName "Maria Papanikolaou" ;
-  TEWStriage:psychologicalTrauma "false"^^xsd:boolean ;
   TEWStriage:stretcherNeededOrImmobilePatient "false"^^xsd:boolean ;
   TEWStriage:vitalSignsOfPatient TEWStriage:VSp0 ;
 .
@@ -219,13 +194,6 @@ TEWStriage:patientsName
   rdfs:domain TEWStriage:Patient ;
   rdfs:label "This property stores the name of a patient." ;
   rdfs:range xsd:string ;
-.
-TEWStriage:psychologicalTrauma
-  rdf:type rdf:Property ;
-  rdfs:domain TEWStriage:Patient ;
-  rdfs:label "This property indicates the existence of a psychological trauma to a patient." ;
-  rdfs:range xsd:boolean ;
-  rdfs:subPropertyOf TEWStriage:existenceOfTrauma ;
 .
 TEWStriage:stretcherNeededOrImmobilePatient
   rdf:type rdf:Property ;
