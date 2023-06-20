@@ -17,8 +17,8 @@ import org.eclipse.rdf4j.model.vocabulary.XMLSchema;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.RepositoryException;
 import org.eclipse.rdf4j.repository.http.HTTPRepository;
-import org.eclipse.rdf4j.rio.RDFFormat; //
-import org.eclipse.rdf4j.rio.RDFParseException; //
+import org.eclipse.rdf4j.rio.RDFFormat; 
+import org.eclipse.rdf4j.rio.RDFParseException; 
 import org.eclipse.rdf4j.rio.Rio;
 import org.eclipse.rdf4j.rio.UnsupportedRDFormatException;
 
@@ -178,14 +178,14 @@ public class MedicalTriage
 			
 			connection.add(model);
 			
-			/**File file = new File("C:\\patientsTriplets"); //this doesn't work yet
+			File file = new File("./PatientsTriplets"); 
 			FileOutputStream out = new FileOutputStream(file);
 			try {
 				Rio.write(model, out, RDFFormat.TURTLE);
 			}
 			finally {
 				out.close();
-			}*/
+			}
 			
 		}
 		catch (Exception e) 

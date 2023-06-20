@@ -1,0 +1,289 @@
+@prefix a: <http://MedOntology.project.rdfs/TEWStriage> .
+
+<http://MedOntology.project.rdfs/TEWStriageAVPUstate1> a "\"Awake\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageTEWScode1> a "\"Green\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageVs1> a "\"VitalSigns\"";
+  <TEWStriage:HR> "60";
+  <TEWStriage:RR> "18";
+  <TEWStriage:SBP> "120";
+  <TEWStriage:temp> "36.2" .
+
+<http://MedOntology.project.rdfs/TEWStriageP1> a "\"FemalePatient\"";
+  <TEWStriage:deadPatient> "false";
+  <TEWStriage:patientsName> "\"Katerina Lagou\"";
+  <TEWStriage:AVPUstateOfPatient> "{\"type\":\"Awake\"}";
+  <TEWStriage:TEWScodeOfPatient> "{\"type\":\"Green\"}";
+  <TEWStriage:VitalSignsOfPatient> "{\"type\":\"VitalSigns\",\"HR\":60,\"RR\":18,\"SBP\":120,\"temperature\":36.2}";
+  <TEWStriage:TEWSscore> "1";
+  <TEWStriage:ableToWalk> "true";
+  <TEWStriage:existenceOfTrauma> "false";
+  <TEWStriage:ageOfPatient> "24";
+  <TEWStriage:needsHelpToWalk> "false";
+  <TEWStriage:stretcherNeededOrImmobilePatient> "false" .
+
+<http://MedOntology.project.rdfs/TEWStriageP2> a "\"FemalePatient\"";
+  <TEWStriage:deadPatient> "true";
+  <TEWStriage:patientsName> "\"Kiriaki Vordou\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageAVPUstate3> a "\"Awake\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageTEWScode3> a "\"Green\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageVs3> a "\"VitalSigns\"";
+  <TEWStriage:HR> "107";
+  <TEWStriage:RR> "12";
+  <TEWStriage:SBP> "130";
+  <TEWStriage:temp> "36" .
+
+<http://MedOntology.project.rdfs/TEWStriageP3> a "\"FemalePatient\"";
+  <TEWStriage:deadPatient> "false";
+  <TEWStriage:patientsName> "\"Ioanna Papakiriazi\"";
+  <TEWStriage:AVPUstateOfPatient> "{\"type\":\"Awake\"}";
+  <TEWStriage:TEWScodeOfPatient> "{\"type\":\"Green\"}";
+  <TEWStriage:VitalSignsOfPatient> "{\"type\":\"VitalSigns\",\"HR\":107,\"RR\":12,\"SBP\":130,\"temperature\":36}";
+  <TEWStriage:TEWSscore> "2";
+  <TEWStriage:ableToWalk> "true";
+  <TEWStriage:existenceOfTrauma> "true";
+  <TEWStriage:ageOfPatient> "21";
+  <TEWStriage:needsHelpToWalk> "false";
+  <TEWStriage:stretcherNeededOrImmobilePatient> "false" .
+
+<http://MedOntology.project.rdfs/TEWStriageP4> a "\"FemalePatient\"";
+  <TEWStriage:deadPatient> "true";
+  <TEWStriage:patientsName> "\"Eleonora Varsami\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageP5> a "\"MalePatient\"";
+  <TEWStriage:deadPatient> "true";
+  <TEWStriage:patientsName> "\"Konstantinos Zervas\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageAVPUstate6> a "\"Awake\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageTEWScode6> a "\"Green\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageVs6> a "\"VitalSigns\"";
+  <TEWStriage:HR> "72";
+  <TEWStriage:RR> "11";
+  <TEWStriage:SBP> "180";
+  <TEWStriage:temp> "37.3" .
+
+<http://MedOntology.project.rdfs/TEWStriageP6> a "\"MalePatient\"";
+  <TEWStriage:deadPatient> "false";
+  <TEWStriage:patientsName> "\"Anastasios Gogos\"";
+  <TEWStriage:AVPUstateOfPatient> "{\"type\":\"Awake\"}";
+  <TEWStriage:TEWScodeOfPatient> "{\"type\":\"Green\"}";
+  <TEWStriage:VitalSignsOfPatient> "{\"type\":\"VitalSigns\",\"HR\":72,\"RR\":11,\"SBP\":180,\"temperature\":37.3}";
+  <TEWStriage:TEWSscore> "2";
+  <TEWStriage:ableToWalk> "false";
+  <TEWStriage:existenceOfTrauma> "true";
+  <TEWStriage:ageOfPatient> "21";
+  <TEWStriage:needsHelpToWalk> "true";
+  <TEWStriage:stretcherNeededOrImmobilePatient> "false" .
+
+<http://MedOntology.project.rdfs/TEWStriageAVPUstate7> a "\"Awake\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageTEWScode7> a "\"Yellow\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageVs7> a "\"VitalSigns\"";
+  <TEWStriage:HR> "108";
+  <TEWStriage:RR> "19";
+  <TEWStriage:SBP> "202";
+  <TEWStriage:temp> "35.8" .
+
+<http://MedOntology.project.rdfs/TEWStriageP7> a "\"MalePatient\"";
+  <TEWStriage:deadPatient> "false";
+  <TEWStriage:patientsName> "\"Panagiotis Ioakim\"";
+  <TEWStriage:AVPUstateOfPatient> "{\"type\":\"Awake\"}";
+  <TEWStriage:TEWScodeOfPatient> "{\"type\":\"Yellow\"}";
+  <TEWStriage:VitalSignsOfPatient> "{\"type\":\"VitalSigns\",\"HR\":108,\"RR\":19,\"SBP\":202,\"temperature\":35.8}";
+  <TEWStriage:TEWSscore> "4";
+  <TEWStriage:ableToWalk> "true";
+  <TEWStriage:existenceOfTrauma> "false";
+  <TEWStriage:ageOfPatient> "16";
+  <TEWStriage:needsHelpToWalk> "false";
+  <TEWStriage:stretcherNeededOrImmobilePatient> "false" .
+
+<http://MedOntology.project.rdfs/TEWStriageAVPUstate8> a "\"Awake\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageTEWScode8> a "\"Yellow\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageVs8> a "\"VitalSigns\"";
+  <TEWStriage:HR> "109";
+  <TEWStriage:RR> "35";
+  <TEWStriage:SBP> "167";
+  <TEWStriage:temp> "35.2" .
+
+<http://MedOntology.project.rdfs/TEWStriageP8> a "\"MalePatient\"";
+  <TEWStriage:deadPatient> "false";
+  <TEWStriage:patientsName> "\"Orestis Makris\"";
+  <TEWStriage:AVPUstateOfPatient> "{\"type\":\"Awake\"}";
+  <TEWStriage:TEWScodeOfPatient> "{\"type\":\"Yellow\"}";
+  <TEWStriage:VitalSignsOfPatient> "{\"type\":\"VitalSigns\",\"HR\":109,\"RR\":35,\"SBP\":167,\"temperature\":35.2}";
+  <TEWStriage:TEWSscore> "4";
+  <TEWStriage:ableToWalk> "true";
+  <TEWStriage:existenceOfTrauma> "false";
+  <TEWStriage:ageOfPatient> "31";
+  <TEWStriage:needsHelpToWalk> "false";
+  <TEWStriage:stretcherNeededOrImmobilePatient> "false" .
+
+<http://MedOntology.project.rdfs/TEWStriageAVPUstate9> a "\"Verbal\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageTEWScode9> a "\"Yellow\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageVs9> a "\"VitalSigns\"";
+  <TEWStriage:HR> "90";
+  <TEWStriage:RR> "10";
+  <TEWStriage:SBP> "196";
+  <TEWStriage:temp> "36.1" .
+
+<http://MedOntology.project.rdfs/TEWStriageP9> a "\"FemalePatient\"";
+  <TEWStriage:deadPatient> "false";
+  <TEWStriage:patientsName> "\"Maria Atzaraki\"";
+  <TEWStriage:AVPUstateOfPatient> "{\"type\":\"Verbal\"}";
+  <TEWStriage:TEWScodeOfPatient> "{\"type\":\"Yellow\"}";
+  <TEWStriage:VitalSignsOfPatient> "{\"type\":\"VitalSigns\",\"HR\":90,\"RR\":10,\"SBP\":196,\"temperature\":36.1}";
+  <TEWStriage:TEWSscore> "3";
+  <TEWStriage:ableToWalk> "false";
+  <TEWStriage:existenceOfTrauma> "false";
+  <TEWStriage:ageOfPatient> "46";
+  <TEWStriage:needsHelpToWalk> "false";
+  <TEWStriage:stretcherNeededOrImmobilePatient> "true" .
+
+<http://MedOntology.project.rdfs/TEWStriageAVPUstate10> a "\"Pain\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageTEWScode10> a "\"Orange\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageVs10> a "\"VitalSigns\"";
+  <TEWStriage:HR> "78";
+  <TEWStriage:RR> "11";
+  <TEWStriage:SBP> "158";
+  <TEWStriage:temp> "36.7" .
+
+<http://MedOntology.project.rdfs/TEWStriageP10> a "\"MalePatient\"";
+  <TEWStriage:deadPatient> "false";
+  <TEWStriage:patientsName> "\"Andreas Nikolaou\"";
+  <TEWStriage:AVPUstateOfPatient> "{\"type\":\"Pain\"}";
+  <TEWStriage:TEWScodeOfPatient> "{\"type\":\"Orange\"}";
+  <TEWStriage:VitalSignsOfPatient> "{\"type\":\"VitalSigns\",\"HR\":78,\"RR\":11,\"SBP\":158,\"temperature\":36.7}";
+  <TEWStriage:TEWSscore> "5";
+  <TEWStriage:ableToWalk> "false";
+  <TEWStriage:existenceOfTrauma> "true";
+  <TEWStriage:ageOfPatient> "64";
+  <TEWStriage:needsHelpToWalk> "false";
+  <TEWStriage:stretcherNeededOrImmobilePatient> "true" .
+
+<http://MedOntology.project.rdfs/TEWStriageAVPUstate11> a "\"Unresponsive\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageTEWScode11> a "\"Orange\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageVs11> a "\"VitalSigns\"";
+  <TEWStriage:HR> "79";
+  <TEWStriage:RR> "13";
+  <TEWStriage:SBP> "95";
+  <TEWStriage:temp> "35" .
+
+<http://MedOntology.project.rdfs/TEWStriageP11> a "\"MalePatient\"";
+  <TEWStriage:deadPatient> "false";
+  <TEWStriage:patientsName> "\"Kiriakos Spanos\"";
+  <TEWStriage:AVPUstateOfPatient> "{\"type\":\"Unresponsive\"}";
+  <TEWStriage:TEWScodeOfPatient> "{\"type\":\"Orange\"}";
+  <TEWStriage:VitalSignsOfPatient> "{\"type\":\"VitalSigns\",\"HR\":79,\"RR\":13,\"SBP\":95,\"temperature\":35}";
+  <TEWStriage:TEWSscore> "6";
+  <TEWStriage:ableToWalk> "false";
+  <TEWStriage:existenceOfTrauma> "false";
+  <TEWStriage:ageOfPatient> "28";
+  <TEWStriage:needsHelpToWalk> "false";
+  <TEWStriage:stretcherNeededOrImmobilePatient> "true" .
+
+<http://MedOntology.project.rdfs/TEWStriageAVPUstate12> a "\"Awake\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageTEWScode12> a "\"Orange\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageVs12> a "\"VitalSigns\"";
+  <TEWStriage:HR> "123";
+  <TEWStriage:RR> "28";
+  <TEWStriage:SBP> "198";
+  <TEWStriage:temp> "36.8" .
+
+<http://MedOntology.project.rdfs/TEWStriageP12> a "\"FemalePatient\"";
+  <TEWStriage:deadPatient> "false";
+  <TEWStriage:patientsName> "\"Danai Pappa\"";
+  <TEWStriage:AVPUstateOfPatient> "{\"type\":\"Awake\"}";
+  <TEWStriage:TEWScodeOfPatient> "{\"type\":\"Orange\"}";
+  <TEWStriage:VitalSignsOfPatient> "{\"type\":\"VitalSigns\",\"HR\":123,\"RR\":28,\"SBP\":198,\"temperature\":36.8}";
+  <TEWStriage:TEWSscore> "5";
+  <TEWStriage:ableToWalk> "false";
+  <TEWStriage:existenceOfTrauma> "false";
+  <TEWStriage:ageOfPatient> "50";
+  <TEWStriage:needsHelpToWalk> "true";
+  <TEWStriage:stretcherNeededOrImmobilePatient> "false" .
+
+<http://MedOntology.project.rdfs/TEWStriageAVPUstate13> a "\"Pain\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageTEWScode13> a "\"Red\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageVs13> a "\"VitalSigns\"";
+  <TEWStriage:HR> "100";
+  <TEWStriage:RR> "14";
+  <TEWStriage:SBP> "195";
+  <TEWStriage:temp> "38.9" .
+
+<http://MedOntology.project.rdfs/TEWStriageP13> a "\"MalePatient\"";
+  <TEWStriage:deadPatient> "false";
+  <TEWStriage:patientsName> "\"Stylianos Keimalis\"";
+  <TEWStriage:AVPUstateOfPatient> "{\"type\":\"Pain\"}";
+  <TEWStriage:TEWScodeOfPatient> "{\"type\":\"Red\"}";
+  <TEWStriage:VitalSignsOfPatient> "{\"type\":\"VitalSigns\",\"HR\":100,\"RR\":14,\"SBP\":195,\"temperature\":38.9}";
+  <TEWStriage:TEWSscore> "7";
+  <TEWStriage:ableToWalk> "false";
+  <TEWStriage:existenceOfTrauma> "true";
+  <TEWStriage:ageOfPatient> "67";
+  <TEWStriage:needsHelpToWalk> "false";
+  <TEWStriage:stretcherNeededOrImmobilePatient> "true" .
+
+<http://MedOntology.project.rdfs/TEWStriageAVPUstate14> a "\"Awake\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageTEWScode14> a "\"Red\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageVs14> a "\"VitalSigns\"";
+  <TEWStriage:HR> "129";
+  <TEWStriage:RR> "29";
+  <TEWStriage:SBP> "203";
+  <TEWStriage:temp> "37.9" .
+
+<http://MedOntology.project.rdfs/TEWStriageP14> a "\"FemalePatient\"";
+  <TEWStriage:deadPatient> "false";
+  <TEWStriage:patientsName> "\"Irida Karipidi\"";
+  <TEWStriage:AVPUstateOfPatient> "{\"type\":\"Awake\"}";
+  <TEWStriage:TEWScodeOfPatient> "{\"type\":\"Red\"}";
+  <TEWStriage:VitalSignsOfPatient> "{\"type\":\"VitalSigns\",\"HR\":129,\"RR\":29,\"SBP\":203,\"temperature\":37.9}";
+  <TEWStriage:TEWSscore> "7";
+  <TEWStriage:ableToWalk> "false";
+  <TEWStriage:existenceOfTrauma> "false";
+  <TEWStriage:ageOfPatient> "42";
+  <TEWStriage:needsHelpToWalk> "true";
+  <TEWStriage:stretcherNeededOrImmobilePatient> "false" .
+
+<http://MedOntology.project.rdfs/TEWStriageAVPUstate15> a "\"Unresponsive\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageTEWScode15> a "\"Red\"" .
+
+<http://MedOntology.project.rdfs/TEWStriageVs15> a "\"VitalSigns\"";
+  <TEWStriage:HR> "108";
+  <TEWStriage:RR> "20";
+  <TEWStriage:SBP> "199";
+  <TEWStriage:temp> "36.5" .
+
+<http://MedOntology.project.rdfs/TEWStriageP15> a "\"MalePatient\"";
+  <TEWStriage:deadPatient> "false";
+  <TEWStriage:patientsName> "\"Leonidas Thanou\"";
+  <TEWStriage:AVPUstateOfPatient> "{\"type\":\"Unresponsive\"}";
+  <TEWStriage:TEWScodeOfPatient> "{\"type\":\"Red\"}";
+  <TEWStriage:VitalSignsOfPatient> "{\"type\":\"VitalSigns\",\"HR\":108,\"RR\":20,\"SBP\":199,\"temperature\":36.5}";
+  <TEWStriage:TEWSscore> "8";
+  <TEWStriage:ableToWalk> "false";
+  <TEWStriage:existenceOfTrauma> "true";
+  <TEWStriage:ageOfPatient> "38";
+  <TEWStriage:needsHelpToWalk> "false";
+  <TEWStriage:stretcherNeededOrImmobilePatient> "true" .
