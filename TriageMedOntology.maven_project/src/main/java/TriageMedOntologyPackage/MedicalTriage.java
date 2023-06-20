@@ -105,7 +105,7 @@ public class MedicalTriage
 			    System.out.println(patientsIRI); //just a check
 			    //System.out.println(dataIRI); //just a check
 			    
-				// Accessing the name element of every patient
+			    // Accessing the name element of every patient
 				JsonElement nameElement = patient.get("patientsName");
 				String name = nameElement.getAsString();
 				System.out.println("Name: " + name);
@@ -118,8 +118,8 @@ public class MedicalTriage
 				String sex = sexOfPatient.getAsString();
 				System.out.println(sex);
 				    
-				try
-				{	    
+				if (!dead)
+				{	
 					JsonObject AVPUdata = patient.get("AVPUstateOfPatient").getAsJsonObject();
 					JsonElement AVPUstate = AVPUdata.get("type");
 					    
@@ -127,8 +127,7 @@ public class MedicalTriage
 					JsonElement tewsCode = tewsCodeData.get("type");
 					    
 					JsonElement tewsScore = patient.get("TEWSscore"); //this one should be calculated by a SPARQL query
-					    
-					JsonElement ableToMove = patient.get("abilityOfMobility");
+					System.out.println(tewsScore.getAsInt());
 					    
 					JsonObject VSdata = patient.get("VitalSignsOfPatient").getAsJsonObject();
 					JsonElement VStype = VSdata.get("type");
@@ -149,25 +148,26 @@ public class MedicalTriage
 					    
 					builder.subject(AVPUstateIRI).add(RDF.TYPE, AVPUstate);
 					builder.subject(TEWScodeIRI).add(RDF.TYPE, tewsCode);
-					builder.subject(vsIRI).add("type", VStype).add("HR", HR).add("RR", RR).add("SBP", SBP).add("temp", temp);
+					builder.subject(vsIRI).add(RDF.TYPE, VStype).add("TEWStriage:HR", HR).add("TEWStriage:RR", RR)
+							.add("TEWStriage:SBP", SBP).add("TEWStriage:temp", temp);
 					 
-					builder.subject(patientsIRI).add(RDF.TYPE, sexOfPatient).add("deadPatient", deadPatient)
-							.add("patientsName", nameElement).add("AVPUstateOfPatient", AVPUdata)
-							.add("TEWScodeOfPatient", tewsCodeData).add("VitalSignsOfPatient", VSdata)
-							.add("abilityOfMobility", ableToMove).add("TEWSscore", tewsScore)
-							.add("ableToWalk", ableToWalk).add("existenceOfTrauma", trauma)
-							.add("ageOfPatient", age).add("needsHelpToWalk", needsHelpToWalk)
-							.add("stretcherNeededOrImmobilePatient", stretcher);
+					builder.subject(patientsIRI).add(RDF.TYPE, sexOfPatient).add("TEWStriage:deadPatient", deadPatient)
+							.add("TEWStriage:patientsName", nameElement).add("TEWStriage:AVPUstateOfPatient", AVPUdata)
+							.add("TEWStriage:TEWScodeOfPatient", tewsCodeData).add("TEWStriage:VitalSignsOfPatient", VSdata)
+							.add("TEWStriage:TEWSscore", tewsScore).add("TEWStriage:ableToWalk", ableToWalk)
+							.add("TEWStriage:existenceOfTrauma", trauma).add("TEWStriage:ageOfPatient", age)
+							.add("TEWStriage:needsHelpToWalk", needsHelpToWalk)
+							.add("TEWStriage:stretcherNeededOrImmobilePatient", stretcher);
+					
 				}
-				catch (Exception e) {}
-				
-				if (dead)
+				else
 				{
 					builder.subject(patientsIRI).add(RDF.TYPE, sexOfPatient).add("TEWStriage:deadPatient", deadPatient)
 					.add("TEWStriage:patientsName", nameElement);
 				}
-				    
+				
 			}
+			
 			Model model = builder.build();
 		    
 			//Printing statements for debugging
@@ -176,7 +176,9 @@ public class MedicalTriage
 				System.out.println(st);
 			}
 			
-			/**File file = new File("/PatientsTriplets"); //this doesn't work yet
+			connection.add(model);
+			
+			/**File file = new File("C:\\patientsTriplets"); //this doesn't work yet
 			FileOutputStream out = new FileOutputStream(file);
 			try {
 				Rio.write(model, out, RDFFormat.TURTLE);
@@ -185,7 +187,6 @@ public class MedicalTriage
 				out.close();
 			}*/
 			
-			connection.add(model);
 		}
 		catch (Exception e) 
 		{
