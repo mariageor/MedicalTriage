@@ -102,7 +102,7 @@ public class MedicalTriage
 			    IRI vsIRI = factory.createIRI(namespace, "Vs" + (i+1)); 
 			    IRI AVPUstateIRI = factory.createIRI(namespace, "AVPUstate" + (i+1)); 
 			    IRI TEWScodeIRI = factory.createIRI(namespace, "TEWScode" + (i+1)); 
-			    System.out.println(patientsIRI); //just a check
+			    //System.out.println(patientsIRI); //just a check
 			    //System.out.println(dataIRI); //just a check
 			    
 			    // Accessing the name element of every patient
@@ -127,7 +127,6 @@ public class MedicalTriage
 					JsonElement tewsCode = tewsCodeData.get("type");
 					    
 					JsonElement tewsScore = patient.get("TEWSscore"); //this one should be calculated by a SPARQL query
-					System.out.println(tewsScore.getAsInt());
 					    
 					JsonObject VSdata = patient.get("VitalSignsOfPatient").getAsJsonObject();
 					JsonElement VStype = VSdata.get("type");
@@ -176,9 +175,7 @@ public class MedicalTriage
 				System.out.println(st);
 			}
 			
-			connection.add(model);
-			
-			File file = new File("./PatientsTriplets"); 
+			File file = new File("./PatientsTriplets.owl"); 
 			FileOutputStream out = new FileOutputStream(file);
 			try {
 				Rio.write(model, out, RDFFormat.TURTLE);
@@ -187,6 +184,7 @@ public class MedicalTriage
 				out.close();
 			}
 			
+			connection.add(model);
 		}
 		catch (Exception e) 
 		{
