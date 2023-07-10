@@ -10,10 +10,15 @@ import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.impl.EmptyModel;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
+import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.model.vocabulary.XMLSchema;
+import org.eclipse.rdf4j.query.BindingSet;
+import org.eclipse.rdf4j.query.TupleQuery;
+import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.RepositoryException;
 import org.eclipse.rdf4j.repository.http.HTTPRepository;
@@ -73,6 +78,8 @@ public class MedicalTriage
 	{
 		System.out.println("Loading new instances...");
 		
+		//Model model = new TreeModel();
+		
 		// Reading the json file, which includes patients data
 		try(JsonReader reader = new JsonReader(new FileReader("C://PatientsData.json")))
 		{
@@ -115,8 +122,6 @@ public class MedicalTriage
 				Boolean dead = deadPatient.getAsBoolean();
 				
 				JsonElement sexOfPatient = patient.get("type");
-				String sex = sexOfPatient.getAsString();
-				System.out.println(sex);
 				    
 				if (!dead)
 				{	
@@ -168,29 +173,59 @@ public class MedicalTriage
 			}
 			
 			Model model = builder.build();
+			connection.add(model);
+			//model = builder.build();
 		    
 			//Printing statements for debugging
-			for(Statement st: model) 
-			{
-				System.out.println(st);
-			}
+			//for(Statement st: model) 
+			//{
+				//System.out.println(st);
+			//}
 			
 			File file = new File("./PatientsTriplets.owl"); 
 			FileOutputStream out = new FileOutputStream(file);
 			try {
 				Rio.write(model, out, RDFFormat.TURTLE);
 			}
-			finally {
+			finally 
+			{
 				out.close();
 			}
 			
-			connection.add(model);
 		}
 		catch (Exception e) 
 		{
 			// General exception handler
 			e.printStackTrace();
 		}
+		
+		//return model;
+		
+	}
+	
+	
+	public void SPARQLnumberOfDeathsQuery()
+	{
+		System.out.println("Number of deaths:");
+		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
+		queryString += "select (COUNT(?p) AS ?deaths)\n";
+		queryString += "where\n";
+		queryString += "{\n";
+		queryString += "?p a TEWStriage:Patient.\n";
+		queryString += " ?p TEWStriage:deadPatient true.\n";
+		queryString += "}\n";
+		
+		TupleQuery query = connection.prepareTupleQuery(queryString);
+		
+		TupleQueryResult result = query.evaluate();
+		while (result.hasNext()) {
+			BindingSet bindingSet = result.next();
+			
+			IRI a = (IRI) bindingSet.getBinding("a").getValue();
+			System.out.println(a);
+				
+		}
+		result.close();
 		
 	}
 	
@@ -212,7 +247,10 @@ public class MedicalTriage
 		{
 			medicalTriage.loadOntology();
 			medicalTriage.loadInstances();
+			//Model model = medicalTriage.loadInstances();
+			//connection.add(model);
 			connection.commit();
+			medicalTriage.SPARQLnumberOfDeathsQuery();
 		}
 		catch (Exception e)
 		{
