@@ -5,10 +5,12 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
@@ -61,10 +63,10 @@ public class MedicalTriage
 	{
 		System.out.println("Loading the ontology...");
     	
-		connection.begin();
+		this.connection.begin();
 		
 		// Getting the turtle file of the ontology and adding it in the connection which was created
-		connection.add(MedicalTriage.class.getResourceAsStream("/TEWStriage.ttl"), "urn:base", RDFFormat.TURTLE);
+		this.connection.add(MedicalTriage.class.getResourceAsStream("/TEWStriage.ttl"), "urn:base", RDFFormat.TURTLE);
 	}
 	
 	/**
@@ -124,15 +126,15 @@ public class MedicalTriage
 				if (!dead)
 				{	
 					JsonObject AVPUdata = patient.get("AVPUstateOfPatient").getAsJsonObject();
-					JsonElement AVPUstate = AVPUdata.get("type");
+					JsonElement AVPUstate = AVPUdata.get("type"); // it may be unecessary
 					    
 					JsonObject tewsCodeData = patient.get("TEWScodeOfPatient").getAsJsonObject(); //this one should be calculated by a SPARQL query
-					JsonElement tewsCode = tewsCodeData.get("type");
+					JsonElement tewsCode = tewsCodeData.get("type"); // it may be unecessary
 					    
 					JsonElement tewsScore = patient.get("TEWSscore"); //this one should be calculated by a SPARQL query
 					    
 					JsonObject VSdata = patient.get("VitalSignsOfPatient").getAsJsonObject();
-					JsonElement VStype = VSdata.get("type");
+					JsonElement VStype = VSdata.get("type"); // it may be unecessary
 					JsonElement HR = VSdata.get("HR");
 					JsonElement RR = VSdata.get("RR");
 					JsonElement SBP = VSdata.get("SBP");
@@ -181,7 +183,7 @@ public class MedicalTriage
 			}
 			
 			Model model = builder.build();
-			connection.add(model);
+			this.connection.add(model);
 			//model = builder.build();
 		    
 			//Printing statements for debugging
@@ -220,14 +222,14 @@ public class MedicalTriage
 	{
 		System.out.println("Number of deaths:");
 		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
-		queryString += "select (COUNT(?p) AS ?deaths)\n";
-		queryString += "where\n";
+		queryString += "SELECT (COUNT(?p) AS ?deaths)\n";
+		queryString += "WHERE\n";
 		queryString += "{\n";
 		queryString += "?p a TEWStriage:Patient.\n";
 		queryString += " ?p TEWStriage:deadPatient true.\n";
 		queryString += "}\n";
 		
-		TupleQuery query = connection.prepareTupleQuery(queryString);
+		TupleQuery query = this.connection.prepareTupleQuery(queryString);
 		
 		TupleQueryResult result = query.evaluate();
 		while (result.hasNext()) {
@@ -239,6 +241,45 @@ public class MedicalTriage
 		}
 		result.close();
 		
+	}
+	
+	
+	public void SPARQLtewsColourCodesQuery()
+	{
+		List<String> colours = new ArrayList<String>();
+		colours.add("Blue"); // it should have the same results as the number of deaths query
+		colours.add("Green");
+		colours.add("Yellow");
+		colours.add("Orange");
+		colours.add("Red");
+		
+		
+		Iterator<String> iterator = colours.iterator();
+	    while(iterator.hasNext()) 
+	    {
+
+			String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
+	    	
+	    	queryString += "SELECT (COUNT(?p) AS ?"+iterator.next()+"Codes) \n";
+	    	queryString += "WHERE\n";
+	    	queryString += "{\n";
+	    	queryString += "?p a TEWStriage:Patient.\n";
+	    	queryString += "?p TEWStriage:TEWScodeOfPatient ?c.\n";
+	    	queryString += "?c a TEWStriage:"+iterator.next()+".\n";
+	    	queryString += "}\n";
+	    	
+	    	TupleQuery query = this.connection.prepareTupleQuery(queryString);
+			
+			TupleQueryResult result = query.evaluate();
+			while (result.hasNext()) {
+				BindingSet bindingSet = result.next();
+				
+				IRI a = (IRI) bindingSet.getBinding("a").getValue();
+				System.out.println(a);
+					
+			}
+			result.close();
+	    }
 	}
 	
 	
