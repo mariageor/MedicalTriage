@@ -8,14 +8,12 @@ import java.net.URISyntaxException;
 
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
-import org.eclipse.rdf4j.model.impl.EmptyModel;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
-import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
-import org.eclipse.rdf4j.model.vocabulary.XMLSchema;
 import org.eclipse.rdf4j.query.BindingSet;
 import org.eclipse.rdf4j.query.TupleQuery;
 import org.eclipse.rdf4j.query.TupleQueryResult;
@@ -94,7 +92,7 @@ public class MedicalTriage
 			ValueFactory factory = SimpleValueFactory.getInstance();
 
 			JsonObject jsonObject = jsonElement.getAsJsonObject();
-			//jsonObject = jsonObject.getAsJsonObject(); //it may be needed
+			jsonObject = jsonObject.getAsJsonObject(); //it may be needed
 			// Getting the json data as a json array
 			JsonArray jArray = jsonObject.getAsJsonArray("patientsData");
 			
@@ -110,7 +108,7 @@ public class MedicalTriage
 			    IRI AVPUstateIRI = factory.createIRI(namespace, "AVPUstate" + (i+1)); 
 			    IRI TEWScodeIRI = factory.createIRI(namespace, "TEWScode" + (i+1)); 
 			    //System.out.println(patientsIRI); //just a check
-			    //System.out.println(dataIRI); //just a check
+			    //System.out.println(vsIRI); //just a check
 			    
 			    // Accessing the name element of every patient
 				JsonElement nameElement = patient.get("patientsName");
@@ -150,24 +148,34 @@ public class MedicalTriage
 					    
 					JsonElement stretcher = patient.get("stretcherNeededOrImmobilePatient");
 					    
-					builder.subject(AVPUstateIRI).add(RDF.TYPE, AVPUstate);
-					builder.subject(TEWScodeIRI).add(RDF.TYPE, tewsCode);
-					builder.subject(vsIRI).add(RDF.TYPE, VStype).add("TEWStriage:HR", HR).add("TEWStriage:RR", RR)
-							.add("TEWStriage:SBP", SBP).add("TEWStriage:temp", temp);
+					builder.subject(AVPUstateIRI).add(RDF.TYPE, "<http://MedOntology.project.rdfs/TEWStriage#"+AVPUstate.getAsString());
+					builder.subject(TEWScodeIRI).add(RDF.TYPE, "<http://MedOntology.project.rdfs/TEWStriage#"+tewsCode.getAsString());
+					builder.subject(vsIRI).add(RDF.TYPE, "<http://MedOntology.project.rdfs/TEWStriage#"+VStype.getAsString())
+							.add("TEWStriage:HR", factory.createLiteral(HR.getAsInt()))
+							.add("TEWStriage:RR", factory.createLiteral(RR.getAsInt()))
+							.add("TEWStriage:SBP", factory.createLiteral(SBP.getAsInt()))
+							.add("TEWStriage:temp", factory.createLiteral(temp.getAsInt()));
 					 
-					builder.subject(patientsIRI).add(RDF.TYPE, sexOfPatient).add("TEWStriage:deadPatient", deadPatient)
-							.add("TEWStriage:patientsName", nameElement).add("TEWStriage:AVPUstateOfPatient", AVPUdata)
-							.add("TEWStriage:TEWScodeOfPatient", tewsCodeData).add("TEWStriage:VitalSignsOfPatient", VSdata)
-							.add("TEWStriage:TEWSscore", tewsScore).add("TEWStriage:ableToWalk", ableToWalk)
-							.add("TEWStriage:existenceOfTrauma", trauma).add("TEWStriage:ageOfPatient", age)
-							.add("TEWStriage:needsHelpToWalk", needsHelpToWalk)
-							.add("TEWStriage:stretcherNeededOrImmobilePatient", stretcher);
+					
+					builder.subject(patientsIRI).add(RDF.TYPE, "<http://MedOntology.project.rdfs/TEWStriage#"+sexOfPatient.getAsString())
+							.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
+							.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()))
+							.add("TEWStriage:AVPUstateOfPatient", "TEWStriage:AVPUstate"+(i+1)) //search it more
+							.add("TEWStriage:TEWScodeOfPatient", "TEWStriage:TEWScode"+(i+1)) //search it more
+							.add("TEWStriage:VitalSignsOfPatient", "TEWStriage:Vs"+(i+1)) //search it more
+							.add("TEWStriage:TEWSscore", factory.createLiteral(tewsScore.getAsInt()))
+							.add("TEWStriage:ableToWalk", factory.createLiteral(ableToWalk.getAsBoolean()))
+							.add("TEWStriage:existenceOfTrauma", factory.createLiteral(trauma.getAsBoolean()))
+							.add("TEWStriage:ageOfPatient", factory.createLiteral(age.getAsInt()))
+							.add("TEWStriage:needsHelpToWalk", factory.createLiteral(needsHelpToWalk.getAsBoolean()))
+							.add("TEWStriage:stretcherNeededOrImmobilePatient", factory.createLiteral(stretcher.getAsBoolean()));
 					
 				}
 				else
 				{
-					builder.subject(patientsIRI).add(RDF.TYPE, sexOfPatient).add("TEWStriage:deadPatient", deadPatient)
-					.add("TEWStriage:patientsName", nameElement);
+					builder.subject(patientsIRI).add(RDF.TYPE, "<http://MedOntology.project.rdfs/TEWStriage#"+sexOfPatient.getAsString())
+					.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
+					.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()));
 				}
 				
 			}
@@ -182,7 +190,8 @@ public class MedicalTriage
 				//System.out.println(st);
 			//}
 			
-			File file = new File("./PatientsTriplets.owl"); 
+			//File file = new File("./PatientsTriplets.ttl"); 
+			File file = new File("./PatientsTriplets.owl");
 			FileOutputStream out = new FileOutputStream(file);
 			try {
 				Rio.write(model, out, RDFFormat.TURTLE);
@@ -192,6 +201,9 @@ public class MedicalTriage
 				out.close();
 			}
 			
+			// This is needed only if you want to find the exact location of the file created
+			//String currentWorkingDirectory = System.getProperty("user.dir");
+			//System.out.println("Current working directory: " + currentWorkingDirectory);
 		}
 		catch (Exception e) 
 		{
@@ -250,7 +262,7 @@ public class MedicalTriage
 			//Model model = medicalTriage.loadInstances();
 			//connection.add(model);
 			connection.commit();
-			medicalTriage.SPARQLnumberOfDeathsQuery();
+			//medicalTriage.SPARQLnumberOfDeathsQuery();
 		}
 		catch (Exception e)
 		{
