@@ -43,6 +43,7 @@ import com.google.gson.stream.JsonReader;
 public class MedicalTriage 
 {
 	private RepositoryConnection connection;
+	private String namespace;
 	
 	/**
 	 * Constructor of the class MedicalTriage
@@ -51,6 +52,7 @@ public class MedicalTriage
 	public MedicalTriage(RepositoryConnection connection)
 	{
 		this.connection = connection;
+		this.namespace = "http://MedOntology.project.rdfs/TEWStriage#";
 	}
 	
 	/**
@@ -83,12 +85,11 @@ public class MedicalTriage
 		// Reading the json file, which includes patients data
 		try(JsonReader reader = new JsonReader(new FileReader("C://PatientsData.json")))
 		{
-			String namespace = "http://MedOntology.project.rdfs/TEWStriage";
 			JsonElement jsonElement = new JsonParser().parse(reader);
 			
 			// Creating an RDF model with the base URI of the ontology
 			ModelBuilder builder = new ModelBuilder();
-			builder.setNamespace("a", namespace);
+			builder.setNamespace("TEWStriage", this.namespace);
 			
 			// Generating an instance of RDF value 
 			ValueFactory factory = SimpleValueFactory.getInstance();
@@ -126,14 +127,19 @@ public class MedicalTriage
 				if (!dead)
 				{	
 					JsonObject AVPUdata = patient.get("AVPUstateOfPatient").getAsJsonObject();
+					//IRI AVPUiri = factory.createIRI("TEWStriage:AVPUstate"+ (i+1));
 					JsonElement AVPUstate = AVPUdata.get("type"); // it may be unecessary
+					System.out.println(AVPUstate.getAsString());
 					    
 					JsonObject tewsCodeData = patient.get("TEWScodeOfPatient").getAsJsonObject(); //this one should be calculated by a SPARQL query
+					//IRI tewsCodeIRI = factory.createIRI("TEWStriage:TEWScode"+(i+1));
 					JsonElement tewsCode = tewsCodeData.get("type"); // it may be unecessary
+					System.out.println(tewsCode.getAsString());
 					    
 					JsonElement tewsScore = patient.get("TEWSscore"); //this one should be calculated by a SPARQL query
 					    
 					JsonObject VSdata = patient.get("VitalSignsOfPatient").getAsJsonObject();
+					//IRI VsIRI = factory.createIRI("TEWStriage:Vs"+ (i+1));
 					JsonElement VStype = VSdata.get("type"); // it may be unecessary
 					JsonElement HR = VSdata.get("HR");
 					JsonElement RR = VSdata.get("RR");
@@ -150,21 +156,21 @@ public class MedicalTriage
 					    
 					JsonElement stretcher = patient.get("stretcherNeededOrImmobilePatient");
 					    
-					builder.subject(AVPUstateIRI).add(RDF.TYPE, "<http://MedOntology.project.rdfs/TEWStriage#"+AVPUstate.getAsString());
-					builder.subject(TEWScodeIRI).add(RDF.TYPE, "<http://MedOntology.project.rdfs/TEWStriage#"+tewsCode.getAsString());
-					builder.subject(vsIRI).add(RDF.TYPE, "<http://MedOntology.project.rdfs/TEWStriage#"+VStype.getAsString())
+					builder.subject(AVPUstateIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+AVPUstate.getAsString()));
+					builder.subject(TEWScodeIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+tewsCode.getAsString()));
+					builder.subject(vsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+VStype.getAsString()))
 							.add("TEWStriage:HR", factory.createLiteral(HR.getAsInt()))
 							.add("TEWStriage:RR", factory.createLiteral(RR.getAsInt()))
 							.add("TEWStriage:SBP", factory.createLiteral(SBP.getAsInt()))
 							.add("TEWStriage:temp", factory.createLiteral(temp.getAsInt()));
 					 
 					
-					builder.subject(patientsIRI).add(RDF.TYPE, "<http://MedOntology.project.rdfs/TEWStriage#"+sexOfPatient.getAsString())
+					builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+sexOfPatient.getAsString()))
 							.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
 							.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()))
-							.add("TEWStriage:AVPUstateOfPatient", "TEWStriage:AVPUstate"+(i+1)) //search it more
-							.add("TEWStriage:TEWScodeOfPatient", "TEWStriage:TEWScode"+(i+1)) //search it more
-							.add("TEWStriage:VitalSignsOfPatient", "TEWStriage:Vs"+(i+1)) //search it more
+							.add("TEWStriage:AVPUstateOfPatient", AVPUstateIRI) //search it more
+							.add("TEWStriage:TEWScodeOfPatient", TEWScodeIRI) //search it more
+							.add("TEWStriage:VitalSignsOfPatient", vsIRI) //search it more
 							.add("TEWStriage:TEWSscore", factory.createLiteral(tewsScore.getAsInt()))
 							.add("TEWStriage:ableToWalk", factory.createLiteral(ableToWalk.getAsBoolean()))
 							.add("TEWStriage:existenceOfTrauma", factory.createLiteral(trauma.getAsBoolean()))
@@ -175,9 +181,9 @@ public class MedicalTriage
 				}
 				else
 				{
-					builder.subject(patientsIRI).add(RDF.TYPE, "<http://MedOntology.project.rdfs/TEWStriage#"+sexOfPatient.getAsString())
-					.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
-					.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()));
+					builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+sexOfPatient.getAsString()))
+							.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
+							.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()));
 				}
 				
 			}
@@ -203,7 +209,7 @@ public class MedicalTriage
 				out.close();
 			}
 			
-			// This is needed only if you want to find the exact location of the file created
+			// This is needed only if you want to find the exact location of the file created above
 			//String currentWorkingDirectory = System.getProperty("user.dir");
 			//System.out.println("Current working directory: " + currentWorkingDirectory);
 		}
