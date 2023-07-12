@@ -226,7 +226,7 @@ public class MedicalTriage
 		queryString += "WHERE\n";
 		queryString += "{\n";
 		queryString += "?p a TEWStriage:Patient.\n";
-		queryString += " ?p TEWStriage:deadPatient true.\n";
+		queryString += "?p TEWStriage:deadPatient true.\n";
 		queryString += "}\n";
 		
 		TupleQuery query = this.connection.prepareTupleQuery(queryString);
@@ -283,6 +283,31 @@ public class MedicalTriage
 	}
 	
 	
+	public void SPARQLstretcherNeededQuery()
+	{
+		System.out.println("Number of deaths:");
+		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
+		queryString += "SELECT (COUNT(?p) AS ?deaths)\n";
+		queryString += "WHERE\n";
+		queryString += "{\n";
+		queryString += "?p a TEWStriage:Patient.\n";
+		queryString += "?p TEWStriage:stretcherNeededOrImmobilePatient true.\n";
+		queryString += "}\n";
+		
+		TupleQuery query = this.connection.prepareTupleQuery(queryString);
+		
+		TupleQueryResult result = query.evaluate();
+		while (result.hasNext()) {
+			BindingSet bindingSet = result.next();
+			
+			IRI a = (IRI) bindingSet.getBinding("a").getValue();
+			System.out.println(a);
+				
+		}
+		result.close();
+	}
+	
+	
 	public static void main(String[] args) throws RDFParseException, UnsupportedRDFormatException, IOException, URISyntaxException
 	{
 		// Access to a remote repository accessible over HTTP
@@ -303,7 +328,11 @@ public class MedicalTriage
 			//Model model = medicalTriage.loadInstances();
 			//connection.add(model);
 			connection.commit();
+			
+			// SPARQL queries
 			//medicalTriage.SPARQLnumberOfDeathsQuery();
+			//medicalTriage.SPARQLtewsColourCodesQuery();
+			//medicalTriage.SPARQLstretcherNeededQuery();
 		}
 		catch (Exception e)
 		{
