@@ -146,7 +146,8 @@ public class MedicalTriage
 					JsonElement SBP = VSdata.get("SBP");
 					JsonElement temp = VSdata.get("temperature");
 					    
-					JsonElement ableToWalk = patient.get("ableToWalk");
+					JsonElement ableToWalk = patient.get("abilityOfMobility"); 
+					System.out.println(ableToWalk.getAsBoolean());
 					    
 					JsonElement age = patient.get("ageOfPatient");
 					    
@@ -156,23 +157,27 @@ public class MedicalTriage
 					    
 					JsonElement stretcher = patient.get("stretcherNeededOrImmobilePatient");
 					    
-					builder.subject(AVPUstateIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+AVPUstate.getAsString()));
-					builder.subject(TEWScodeIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+tewsCode.getAsString()));
-					builder.subject(vsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+VStype.getAsString()))
+					//builder.subject(AVPUstateIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+AVPUstate.getAsString()));
+					//builder.subject(TEWScodeIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+tewsCode.getAsString()));
+					builder.subject(AVPUstateIRI).add(RDF.TYPE, AVPUstateIRI);
+					builder.subject(TEWScodeIRI).add(RDF.TYPE, TEWScodeIRI);
+					//builder.subject(vsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+VStype.getAsString()))
+					builder.subject(vsIRI).add(RDF.TYPE, vsIRI)
 							.add("TEWStriage:HR", factory.createLiteral(HR.getAsInt()))
 							.add("TEWStriage:RR", factory.createLiteral(RR.getAsInt()))
 							.add("TEWStriage:SBP", factory.createLiteral(SBP.getAsInt()))
 							.add("TEWStriage:temp", factory.createLiteral(temp.getAsInt()));
 					 
 					
-					builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+sexOfPatient.getAsString()))
+					//builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+sexOfPatient.getAsString()))
+					builder.subject(patientsIRI).add(RDF.TYPE, patientsIRI)
 							.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
 							.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()))
 							.add("TEWStriage:AVPUstateOfPatient", AVPUstateIRI) //search it more
 							.add("TEWStriage:TEWScodeOfPatient", TEWScodeIRI) //search it more
 							.add("TEWStriage:VitalSignsOfPatient", vsIRI) //search it more
 							.add("TEWStriage:TEWSscore", factory.createLiteral(tewsScore.getAsInt()))
-							.add("TEWStriage:ableToWalk", factory.createLiteral(ableToWalk.getAsBoolean()))
+							.add("TEWStriage:abilityOfMobility", factory.createLiteral(ableToWalk.getAsBoolean()))
 							.add("TEWStriage:existenceOfTrauma", factory.createLiteral(trauma.getAsBoolean()))
 							.add("TEWStriage:ageOfPatient", factory.createLiteral(age.getAsInt()))
 							.add("TEWStriage:needsHelpToWalk", factory.createLiteral(needsHelpToWalk.getAsBoolean()))
@@ -181,7 +186,8 @@ public class MedicalTriage
 				}
 				else
 				{
-					builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+sexOfPatient.getAsString()))
+					//builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+sexOfPatient.getAsString()))
+					builder.subject(patientsIRI).add(RDF.TYPE, patientsIRI)
 							.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
 							.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()));
 				}
