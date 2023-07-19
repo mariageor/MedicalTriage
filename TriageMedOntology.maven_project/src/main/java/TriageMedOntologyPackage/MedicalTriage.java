@@ -93,9 +93,8 @@ public class MedicalTriage
 			
 			// Generating an instance of RDF value 
 			ValueFactory factory = SimpleValueFactory.getInstance();
-
 			JsonObject jsonObject = jsonElement.getAsJsonObject();
-			jsonObject = jsonObject.getAsJsonObject(); //it may be needed
+			
 			// Getting the json data as a json array
 			JsonArray jArray = jsonObject.getAsJsonArray("patientsData");
 			
@@ -103,15 +102,11 @@ public class MedicalTriage
 			for (int i = 0; i < jArray.size(); i++) 
 			{
 				JsonObject patient = jArray.get(i).getAsJsonObject();
-			    //System.out.println(patient.toString()); //just a check
 			    
-			    
-			    IRI patientsIRI = factory.createIRI(namespace, "P" + (i+1));
-			    IRI vsIRI = factory.createIRI(namespace, "Vs" + (i+1)); 
+			    IRI patientsIRI = factory.createIRI(namespace, "p" + (i+1));
+			    IRI vsIRI = factory.createIRI(namespace, "VSp" + (i+1)); 
 			    IRI AVPUstateIRI = factory.createIRI(namespace, "AVPUstate" + (i+1)); 
 			    IRI TEWScodeIRI = factory.createIRI(namespace, "TEWScode" + (i+1)); 
-			    //System.out.println(patientsIRI); //just a check
-			    //System.out.println(vsIRI); //just a check
 			    
 			    // Accessing the name element of every patient
 				JsonElement nameElement = patient.get("patientsName");
@@ -126,15 +121,15 @@ public class MedicalTriage
 				    
 				if (!dead)
 				{	
+					// I didn't add the colour codes beacause they would be constructed in the end
+					
 					JsonObject AVPUdata = patient.get("AVPUstateOfPatient").getAsJsonObject();
 					//IRI AVPUiri = factory.createIRI("TEWStriage:AVPUstate"+ (i+1));
 					JsonElement AVPUstate = AVPUdata.get("type"); // it may be unecessary
-					System.out.println(AVPUstate.getAsString());
 					    
 					JsonObject tewsCodeData = patient.get("TEWScodeOfPatient").getAsJsonObject(); //this one should be calculated by a SPARQL query
 					//IRI tewsCodeIRI = factory.createIRI("TEWStriage:TEWScode"+(i+1));
 					JsonElement tewsCode = tewsCodeData.get("type"); // it may be unecessary
-					System.out.println(tewsCode.getAsString());
 					    
 					JsonElement tewsScore = patient.get("TEWSscore"); //this one should be calculated by a SPARQL query
 					    
@@ -147,7 +142,6 @@ public class MedicalTriage
 					JsonElement temp = VSdata.get("temperature");
 					    
 					JsonElement ableToWalk = patient.get("abilityOfMobility"); 
-					System.out.println(ableToWalk.getAsBoolean());
 					    
 					JsonElement age = patient.get("ageOfPatient");
 					    
@@ -157,20 +151,17 @@ public class MedicalTriage
 					    
 					JsonElement stretcher = patient.get("stretcherNeededOrImmobilePatient");
 					    
-					//builder.subject(AVPUstateIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+AVPUstate.getAsString()));
-					//builder.subject(TEWScodeIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+tewsCode.getAsString()));
-					builder.subject(AVPUstateIRI).add(RDF.TYPE, AVPUstateIRI);
-					builder.subject(TEWScodeIRI).add(RDF.TYPE, TEWScodeIRI);
-					//builder.subject(vsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+VStype.getAsString()))
-					builder.subject(vsIRI).add(RDF.TYPE, vsIRI)
+					builder.subject(AVPUstateIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+AVPUstate.getAsString()));
+					builder.subject(TEWScodeIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+tewsCode.getAsString()));
+					
+					builder.subject(vsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+VStype.getAsString()))
 							.add("TEWStriage:HR", factory.createLiteral(HR.getAsInt()))
 							.add("TEWStriage:RR", factory.createLiteral(RR.getAsInt()))
 							.add("TEWStriage:SBP", factory.createLiteral(SBP.getAsInt()))
 							.add("TEWStriage:temp", factory.createLiteral(temp.getAsInt()));
 					 
-					
-					//builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+sexOfPatient.getAsString()))
-					builder.subject(patientsIRI).add(RDF.TYPE, patientsIRI)
+					builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:Patient"))
+							.add(RDF.TYPE, factory.createIRI("TEWStriage:"+sexOfPatient.getAsString()))
 							.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
 							.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()))
 							.add("TEWStriage:AVPUstateOfPatient", AVPUstateIRI) //search it more
@@ -186,8 +177,8 @@ public class MedicalTriage
 				}
 				else
 				{
-					//builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+sexOfPatient.getAsString()))
-					builder.subject(patientsIRI).add(RDF.TYPE, patientsIRI)
+					builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:Patient"))
+							.add(RDF.TYPE, factory.createIRI("TEWStriage:"+sexOfPatient.getAsString()))
 							.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
 							.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()));
 				}
@@ -196,7 +187,8 @@ public class MedicalTriage
 			
 			Model model = builder.build();
 			this.connection.add(model);
-			//model = builder.build();
+			//connection.commit(); //just a trial
+			//model = builder.build(); //just a trial
 		    
 			//Printing statements for debugging
 			//for(Statement st: model) 
@@ -204,11 +196,10 @@ public class MedicalTriage
 				//System.out.println(st);
 			//}
 			
-			//File file = new File("./PatientsTriplets.ttl"); 
 			File file = new File("./PatientsTriplets.owl");
 			FileOutputStream out = new FileOutputStream(file);
 			try {
-				Rio.write(model, out, RDFFormat.TURTLE);
+				Rio.write(model, out, RDFFormat.RDFXML);
 			}
 			finally 
 			{
@@ -225,7 +216,7 @@ public class MedicalTriage
 			e.printStackTrace();
 		}
 		
-		//return model;
+		//return model; //just a trial
 		
 	}
 	
@@ -320,6 +311,7 @@ public class MedicalTriage
 	}
 	
 	
+	
 	public static void main(String[] args) throws RDFParseException, UnsupportedRDFormatException, IOException, URISyntaxException
 	{
 		// Access to a remote repository accessible over HTTP
@@ -337,11 +329,12 @@ public class MedicalTriage
 		{
 			medicalTriage.loadOntology();
 			medicalTriage.loadInstances();
-			//Model model = medicalTriage.loadInstances();
-			//connection.add(model);
+			//Model model = medicalTriage.loadInstances(); //just a trial
+			//connection.add(model); //just a trial
 			connection.commit();
 			
 			// SPARQL queries
+			// here should be the call for the function of TEWScodeCalculationSPARQL
 			//medicalTriage.SPARQLnumberOfDeathsQuery();
 			//medicalTriage.SPARQLtewsColourCodesQuery();
 			//medicalTriage.SPARQLstretcherNeededQuery();
