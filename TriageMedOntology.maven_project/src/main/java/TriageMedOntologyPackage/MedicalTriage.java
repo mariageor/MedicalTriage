@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.rdf4j.model.IRI;
+import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
@@ -111,7 +112,7 @@ public class MedicalTriage
 			    // Accessing the name element of every patient
 				JsonElement nameElement = patient.get("patientsName");
 				String name = nameElement.getAsString();
-				System.out.println("Name: " + name);
+				System.out.println("Patient"+i+": " + name);
 				    
 				// Accessing the deadPatient element of every patient
 				JsonElement deadPatient = patient.get("deadPatient");
@@ -223,7 +224,7 @@ public class MedicalTriage
 	
 	public void SPARQLnumberOfDeathsQuery()
 	{
-		System.out.println("Number of deaths:");
+		System.out.print("Number of deaths: ");
 		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
 		queryString += "SELECT (COUNT(?p) AS ?deaths)\n";
 		queryString += "WHERE\n";
@@ -235,11 +236,13 @@ public class MedicalTriage
 		TupleQuery query = this.connection.prepareTupleQuery(queryString);
 		
 		TupleQueryResult result = query.evaluate();
-		while (result.hasNext()) {
+		while (result.hasNext()) 
+		{
 			BindingSet bindingSet = result.next();
 			
-			IRI a = (IRI) bindingSet.getBinding("a").getValue();
-			System.out.println(a);
+			Literal deathsLiteral = (Literal) bindingSet.getBinding("deaths").getValue();
+			int deathsCount = deathsLiteral.intValue();
+			System.out.println(deathsCount);
 				
 		}
 		result.close();
@@ -260,10 +263,12 @@ public class MedicalTriage
 		Iterator<String> iterator = colours.iterator();
 	    while(iterator.hasNext()) 
 	    {
+	    	String nameOfCode = iterator.next()+"Codes";
+	    	System.out.print("The number of "+nameOfCode+" is: ");
 
 			String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
 	    	
-	    	queryString += "SELECT (COUNT(?p) AS ?"+iterator.next()+"Codes) \n";
+	    	queryString += "SELECT (COUNT(?p) AS ?"+nameOfCode+"Codes) \n";
 	    	queryString += "WHERE\n";
 	    	queryString += "{\n";
 	    	queryString += "?p a TEWStriage:Patient.\n";
@@ -277,8 +282,9 @@ public class MedicalTriage
 			while (result.hasNext()) {
 				BindingSet bindingSet = result.next();
 				
-				IRI a = (IRI) bindingSet.getBinding("a").getValue();
-				System.out.println(a);
+				Literal colourLiteral = (Literal) bindingSet.getBinding(nameOfCode).getValue();
+				int colourCount = colourLiteral.intValue();
+				System.out.println(colourCount);
 					
 			}
 			result.close();
@@ -288,9 +294,9 @@ public class MedicalTriage
 	
 	public void SPARQLstretcherNeededQuery()
 	{
-		System.out.println("Number of deaths:");
+		System.out.print("Number of stretchers needed: ");
 		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
-		queryString += "SELECT (COUNT(?p) AS ?deaths)\n";
+		queryString += "SELECT (COUNT(?p) AS ?stretchers)\n";
 		queryString += "WHERE\n";
 		queryString += "{\n";
 		queryString += "?p a TEWStriage:Patient.\n";
@@ -300,11 +306,13 @@ public class MedicalTriage
 		TupleQuery query = this.connection.prepareTupleQuery(queryString);
 		
 		TupleQueryResult result = query.evaluate();
-		while (result.hasNext()) {
+		while (result.hasNext()) 
+		{
 			BindingSet bindingSet = result.next();
 			
-			IRI a = (IRI) bindingSet.getBinding("a").getValue();
-			System.out.println(a);
+			Literal stretchersLiteral = (Literal) bindingSet.getBinding("stretchers").getValue();
+			int stretchersCount = stretchersLiteral.intValue();
+			System.out.println(stretchersCount);
 				
 		}
 		result.close();
@@ -329,15 +337,14 @@ public class MedicalTriage
 		{
 			medicalTriage.loadOntology();
 			medicalTriage.loadInstances();
-			//Model model = medicalTriage.loadInstances(); //just a trial
-			//connection.add(model); //just a trial
 			connection.commit();
 			
 			// SPARQL queries
 			// here should be the call for the function of TEWScodeCalculationSPARQL
-			//medicalTriage.SPARQLnumberOfDeathsQuery();
+			medicalTriage.SPARQLstretcherNeededQuery();
+			medicalTriage.SPARQLnumberOfDeathsQuery();
 			//medicalTriage.SPARQLtewsColourCodesQuery();
-			//medicalTriage.SPARQLstretcherNeededQuery();
+			
 		}
 		catch (Exception e)
 		{
