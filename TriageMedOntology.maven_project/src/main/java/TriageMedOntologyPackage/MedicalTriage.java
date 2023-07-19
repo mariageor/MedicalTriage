@@ -320,6 +320,26 @@ public class MedicalTriage
 	
 	
 	
+	public void TEWScalculation()
+	{
+		// Here I have to check the ranges of the values of HR, RR, SBP, abilityOfMobility and AVPU.
+		// Latly, I have to construct the triplets about  the TEWSscore and TEWScolourCode
+		// and add them in the PatientsTriplets.owl for completeness.
+		
+		System.out.println("Calculatin the results...");
+		
+		// Creating an RDF model with the base URI of the ontology
+		ModelBuilder builder = new ModelBuilder();
+		builder.setNamespace("TEWStriage", this.namespace);
+					
+		// Generating an instance of RDF value 
+		ValueFactory factory = SimpleValueFactory.getInstance();
+		
+		IRI TEWScodeIRI = factory.createIRI(namespace, "TEWScode_pX"); 
+		IRI TEWScolourIRI = factory.createIRI(namespace, "TEWScolourCode_pX"); 
+	}
+	
+	
 	public static void main(String[] args) throws RDFParseException, UnsupportedRDFormatException, IOException, URISyntaxException
 	{
 		// Access to a remote repository accessible over HTTP
@@ -340,7 +360,7 @@ public class MedicalTriage
 			connection.commit();
 			
 			// SPARQL queries
-			// here should be the call for the function of TEWScodeCalculationSPARQL
+			// medicalTriage.TEWScalculation();
 			medicalTriage.SPARQLstretcherNeededQuery();
 			medicalTriage.SPARQLnumberOfDeathsQuery();
 			//medicalTriage.SPARQLtewsColourCodesQuery();
