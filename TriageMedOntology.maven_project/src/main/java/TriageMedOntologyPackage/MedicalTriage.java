@@ -18,6 +18,9 @@ import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.query.BindingSet;
+import org.eclipse.rdf4j.query.GraphQuery;
+import org.eclipse.rdf4j.query.GraphQueryResult;
+import org.eclipse.rdf4j.query.QueryEvaluationException;
 import org.eclipse.rdf4j.query.TupleQuery;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
@@ -133,6 +136,7 @@ public class MedicalTriage
 					JsonElement tewsCode = tewsCodeData.get("type"); // it may be unecessary
 					    
 					JsonElement tewsScore = patient.get("TEWSscore"); //this one should be calculated by a SPARQL query
+					System.out.println(tewsScore.getAsInt());
 					    
 					JsonObject VSdata = patient.get("VitalSignsOfPatient").getAsJsonObject();
 					//IRI VsIRI = factory.createIRI("TEWStriage:Vs"+ (i+1));
@@ -188,8 +192,6 @@ public class MedicalTriage
 			
 			Model model = builder.build();
 			this.connection.add(model);
-			//connection.commit(); //just a trial
-			//model = builder.build(); //just a trial
 		    
 			//Printing statements for debugging
 			//for(Statement st: model) 
@@ -217,14 +219,12 @@ public class MedicalTriage
 			e.printStackTrace();
 		}
 		
-		//return model; //just a trial
-		
 	}
 	
 	
 	public void SPARQLnumberOfDeathsQuery()
 	{
-		System.out.print("Number of deaths: ");
+		System.out.print("\nNumber of deaths: ");
 		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
 		queryString += "SELECT (COUNT(?p) AS ?deaths)\n";
 		queryString += "WHERE\n";
@@ -259,27 +259,30 @@ public class MedicalTriage
 		colours.add("Orange");
 		colours.add("Red");
 		
+		System.out.println("\nThe number of each colour code is:");
 		
 		Iterator<String> iterator = colours.iterator();
 	    while(iterator.hasNext()) 
 	    {
-	    	String nameOfCode = iterator.next()+"Codes";
-	    	System.out.print("The number of "+nameOfCode+" is: ");
+	    	String nameOfCode = iterator.next();
+	    	System.out.print("The number of "+nameOfCode+" codes are: ");
 
 			String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
 	    	
-	    	queryString += "SELECT (COUNT(?p) AS ?"+nameOfCode+"Codes) \n";
+	    	queryString += "SELECT (COUNT(?p) AS ?"+nameOfCode+") \n";
 	    	queryString += "WHERE\n";
 	    	queryString += "{\n";
-	    	queryString += "?p a TEWStriage:Patient.\n";
-	    	queryString += "?p TEWStriage:TEWScodeOfPatient ?c.\n";
-	    	queryString += "?c a TEWStriage:"+iterator.next()+".\n";
+	    	queryString += "	?p a TEWStriage:Patient.\n";
+	    	//queryString += "	?p TEWStriage:TEWScodeOfPatient TEWStriage:"+nameOfCode+".\n";
+	    	queryString += "	?p TEWStriage:TEWScodeOfPatient ?c.\n";
+	    	queryString += "	?c a TEWStriage:"+nameOfCode+".\n";
 	    	queryString += "}\n";
 	    	
 	    	TupleQuery query = this.connection.prepareTupleQuery(queryString);
 			
 			TupleQueryResult result = query.evaluate();
-			while (result.hasNext()) {
+			while (result.hasNext()) 
+			{
 				BindingSet bindingSet = result.next();
 				
 				Literal colourLiteral = (Literal) bindingSet.getBinding(nameOfCode).getValue();
@@ -294,7 +297,7 @@ public class MedicalTriage
 	
 	public void SPARQLstretcherNeededQuery()
 	{
-		System.out.print("Number of stretchers needed: ");
+		System.out.print("\nThe number of strechers needed is: ");
 		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
 		queryString += "SELECT (COUNT(?p) AS ?stretchers)\n";
 		queryString += "WHERE\n";
@@ -316,6 +319,7 @@ public class MedicalTriage
 				
 		}
 		result.close();
+		
 	}
 	
 	
@@ -326,7 +330,7 @@ public class MedicalTriage
 		// Latly, I have to construct the triplets about  the TEWSscore and TEWScolourCode
 		// and add them in the PatientsTriplets.owl for completeness.
 		
-		System.out.println("Calculatin the results...");
+		System.out.println("\nCalculating the results...");
 		
 		// Creating an RDF model with the base URI of the ontology
 		ModelBuilder builder = new ModelBuilder();
@@ -337,6 +341,49 @@ public class MedicalTriage
 		
 		IRI TEWScodeIRI = factory.createIRI(namespace, "TEWScode_pX"); 
 		IRI TEWScolourIRI = factory.createIRI(namespace, "TEWScolourCode_pX"); 
+	}
+	
+	public void constructionOfTEWScolourSPARQLqueries()
+	{	
+		System.out.println("\nConstructing data for patients with TEWS score between 0 and 2:"); // maybe it's unessecary
+		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
+		queryString += "CONSTRUCT\n";
+		queryString += "{\n";
+		queryString += "?p TEWStriage:TEWScodeOfpatient TEWStriage:Green ";
+		//queryString += "	?code a TEWStriage:Green .\n";
+		//queryString += "	?p TEWStriage:TEWScodeOfPatient ?code .\n";
+		queryString += "}\n";
+		queryString += "WHERE\n";
+		queryString += "{\n";
+		queryString += "    ?p a TEWStriage:Patient .\n";
+		queryString += "    ?p TEWStriage:TEWSscore ?s.\n";
+		queryString += "    FILTER(?s >= 0 && ?s <= 2)\n";
+		queryString += "}";
+
+		GraphQuery query = this.connection.prepareGraphQuery(queryString);
+
+		try (GraphQueryResult result = query.evaluate()) {
+		    while (result.hasNext()) 
+		    {
+		        Statement statement = result.next();
+		        
+		        // Here you can process each statement in the result.
+		        // For example, you can retrieve the subject, predicate, and object from the statement.
+		        String subject = statement.getSubject().stringValue();
+		        String predicate = statement.getPredicate().stringValue();
+		        String object = statement.getObject().stringValue();
+
+		        // Do whatever processing you need with the subject, predicate, and object.
+		        // In this example, we will simply print them.
+		        System.out.println("Subject: " + subject);
+		        System.out.println("Predicate: " + predicate);
+		        System.out.println("Object: " + object);
+		        System.out.println("-----------");
+		    }
+		} catch (Exception e) {
+		    // Handle any exceptions that may occur during query evaluation.
+		    e.printStackTrace();
+		}
 	}
 	
 	
@@ -363,7 +410,8 @@ public class MedicalTriage
 			// medicalTriage.TEWScalculation();
 			medicalTriage.SPARQLstretcherNeededQuery();
 			medicalTriage.SPARQLnumberOfDeathsQuery();
-			//medicalTriage.SPARQLtewsColourCodesQuery();
+			medicalTriage.constructionOfTEWScolourSPARQLqueries(); // it doesn't work yet
+			medicalTriage.SPARQLtewsColourCodesQuery();
 			
 		}
 		catch (Exception e)
