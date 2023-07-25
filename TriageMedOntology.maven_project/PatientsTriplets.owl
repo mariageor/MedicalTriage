@@ -8,7 +8,7 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode1">
-	<rdf:type rdf:resource="TEWStriage:Green"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Green"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp1">
@@ -21,7 +21,7 @@
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p1">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:FemalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#FemalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Katerina Lagou</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate1"/>
@@ -37,7 +37,7 @@
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p2">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:FemalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#FemalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Kiriaki Vordou</TEWStriage:patientsName>
 </rdf:Description>
@@ -47,7 +47,7 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode3">
-	<rdf:type rdf:resource="TEWStriage:Green"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Green"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp3">
@@ -60,7 +60,7 @@
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p3">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:FemalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#FemalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Ioanna Papakiriazi</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate3"/>
@@ -76,14 +76,14 @@
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p4">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:FemalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#FemalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Eleonora Varsami</TEWStriage:patientsName>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p5">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:MalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#MalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Konstantinos Zervas</TEWStriage:patientsName>
 </rdf:Description>
@@ -93,7 +93,7 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode6">
-	<rdf:type rdf:resource="TEWStriage:Green"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Green"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp6">
@@ -106,7 +106,7 @@
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p6">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:MalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#MalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Anastasios Gogos</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate6"/>
@@ -125,7 +125,7 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode7">
-	<rdf:type rdf:resource="TEWStriage:Yellow"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Yellow"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp7">
@@ -138,7 +138,7 @@
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p7">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:MalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#MalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Panagiotis Ioakim</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate7"/>
@@ -157,7 +157,7 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode8">
-	<rdf:type rdf:resource="TEWStriage:Yellow"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Yellow"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp8">
@@ -170,7 +170,7 @@
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p8">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:MalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#MalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Orestis Makris</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate8"/>
@@ -189,7 +189,7 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode9">
-	<rdf:type rdf:resource="TEWStriage:Yellow"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Yellow"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp9">
@@ -202,7 +202,7 @@
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p9">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:FemalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#FemalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Maria Atzaraki</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate9"/>
@@ -221,7 +221,7 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode10">
-	<rdf:type rdf:resource="TEWStriage:Orange"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Orange"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp10">
@@ -234,7 +234,7 @@
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p10">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:MalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#MalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Andreas Nikolaou</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate10"/>
@@ -253,7 +253,7 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode11">
-	<rdf:type rdf:resource="TEWStriage:Orange"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Orange"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp11">
@@ -266,7 +266,7 @@
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p11">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:MalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#MalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Kiriakos Spanos</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate11"/>
@@ -285,7 +285,7 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode12">
-	<rdf:type rdf:resource="TEWStriage:Orange"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Orange"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp12">
@@ -298,7 +298,7 @@
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p12">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:FemalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#FemalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Danai Pappa</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate12"/>
@@ -317,7 +317,7 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode13">
-	<rdf:type rdf:resource="TEWStriage:Red"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Red"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp13">
@@ -330,7 +330,7 @@
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p13">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:MalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#MalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Stylianos Keimalis</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate13"/>
@@ -349,7 +349,7 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode14">
-	<rdf:type rdf:resource="TEWStriage:Red"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Red"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp14">
@@ -362,7 +362,7 @@
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p14">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:FemalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#FemalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Irida Karipidi</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate14"/>
@@ -381,7 +381,7 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode15">
-	<rdf:type rdf:resource="TEWStriage:Red"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Red"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp15">
@@ -394,7 +394,7 @@
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#p15">
 	<rdf:type rdf:resource="TEWStriage:Patient"/>
-	<rdf:type rdf:resource="TEWStriage:MalePatient"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#MalePatient"/>
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Leonidas Thanou</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate15"/>

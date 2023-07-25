@@ -87,7 +87,7 @@ public class MedicalTriage
 		//Model model = new TreeModel();
 		
 		// Reading the json file, which includes patients data
-		try(JsonReader reader = new JsonReader(new FileReader("C://PatientsData.json")))
+		try(JsonReader reader = new JsonReader(new FileReader("C://PatientsData1.json")))
 		{
 			JsonElement jsonElement = new JsonParser().parse(reader);
 			
@@ -96,7 +96,7 @@ public class MedicalTriage
 			builder.setNamespace("TEWStriage", this.namespace);
 			
 			// Generating an instance of RDF value 
-			ValueFactory factory = SimpleValueFactory.getInstance();
+			SimpleValueFactory factory = SimpleValueFactory.getInstance();
 			JsonObject jsonObject = jsonElement.getAsJsonObject();
 			
 			// Getting the json data as a json array
@@ -108,9 +108,6 @@ public class MedicalTriage
 				JsonObject patient = jArray.get(i).getAsJsonObject();
 			    
 			    IRI patientsIRI = factory.createIRI(namespace, "p" + (i+1));
-			    IRI vsIRI = factory.createIRI(namespace, "VSp" + (i+1)); 
-			    IRI AVPUstateIRI = factory.createIRI(namespace, "AVPUstate" + (i+1)); 
-			    IRI TEWScodeIRI = factory.createIRI(namespace, "TEWScode" + (i+1)); 
 			    
 			    // Accessing the name element of every patient
 				JsonElement nameElement = patient.get("patientsName");
@@ -125,21 +122,20 @@ public class MedicalTriage
 				    
 				if (!dead)
 				{	
-					// I didn't add the colour codes beacause they would be constructed in the end
+					IRI vsIRI = factory.createIRI(namespace, "VSp" + (i+1)); 
+				    IRI AVPUstateIRI = factory.createIRI(namespace, "AVPUstate" + (i+1)); 
+				    IRI TEWScodeIRI = factory.createIRI(namespace, "TEWScode" + (i+1));
 					
 					JsonObject AVPUdata = patient.get("AVPUstateOfPatient").getAsJsonObject();
-					//IRI AVPUiri = factory.createIRI("TEWStriage:AVPUstate"+ (i+1));
 					JsonElement AVPUstate = AVPUdata.get("type"); // it may be unecessary
 					    
 					JsonObject tewsCodeData = patient.get("TEWScodeOfPatient").getAsJsonObject(); //this one should be calculated by a SPARQL query
-					//IRI tewsCodeIRI = factory.createIRI("TEWStriage:TEWScode"+(i+1));
 					JsonElement tewsCode = tewsCodeData.get("type"); // it may be unecessary
 					    
 					JsonElement tewsScore = patient.get("TEWSscore"); //this one should be calculated by a SPARQL query
 					System.out.println(tewsScore.getAsInt());
 					    
 					JsonObject VSdata = patient.get("VitalSignsOfPatient").getAsJsonObject();
-					//IRI VsIRI = factory.createIRI("TEWStriage:Vs"+ (i+1));
 					JsonElement VStype = VSdata.get("type"); // it may be unecessary
 					JsonElement HR = VSdata.get("HR");
 					JsonElement RR = VSdata.get("RR");
@@ -156,21 +152,22 @@ public class MedicalTriage
 					    
 					JsonElement stretcher = patient.get("stretcherNeededOrImmobilePatient");
 					    
-					builder.subject(AVPUstateIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+AVPUstate.getAsString()));
-					builder.subject(TEWScodeIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+tewsCode.getAsString()));
+					builder.subject(AVPUstateIRI).add(RDF.TYPE, factory.createIRI(namespace,AVPUstate.getAsString()));
+					builder.subject(TEWScodeIRI).add(RDF.TYPE, factory.createIRI(namespace,tewsCode.getAsString()));
 					
-					builder.subject(vsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:"+VStype.getAsString()))
+					builder.subject(vsIRI).add(RDF.TYPE, factory.createIRI(namespace,VStype.getAsString()))
 							.add("TEWStriage:HR", factory.createLiteral(HR.getAsInt()))
 							.add("TEWStriage:RR", factory.createLiteral(RR.getAsInt()))
 							.add("TEWStriage:SBP", factory.createLiteral(SBP.getAsInt()))
 							.add("TEWStriage:temp", factory.createLiteral(temp.getAsInt()));
 					 
 					builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:Patient"))
-							.add(RDF.TYPE, factory.createIRI("TEWStriage:"+sexOfPatient.getAsString()))
+							.add(RDF.TYPE, factory.createIRI(namespace, sexOfPatient.getAsString()))
 							.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
 							.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()))
 							.add("TEWStriage:AVPUstateOfPatient", AVPUstateIRI) //search it more
 							.add("TEWStriage:TEWScodeOfPatient", TEWScodeIRI) //search it more
+							//.add("TEWStriage:TEWScodeOfPatient", tewsCodeData) 
 							.add("TEWStriage:VitalSignsOfPatient", vsIRI) //search it more
 							.add("TEWStriage:TEWSscore", factory.createLiteral(tewsScore.getAsInt()))
 							.add("TEWStriage:abilityOfMobility", factory.createLiteral(ableToWalk.getAsBoolean()))
@@ -178,12 +175,11 @@ public class MedicalTriage
 							.add("TEWStriage:ageOfPatient", factory.createLiteral(age.getAsInt()))
 							.add("TEWStriage:needsHelpToWalk", factory.createLiteral(needsHelpToWalk.getAsBoolean()))
 							.add("TEWStriage:stretcherNeededOrImmobilePatient", factory.createLiteral(stretcher.getAsBoolean()));
-					
 				}
 				else
 				{
 					builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:Patient"))
-							.add(RDF.TYPE, factory.createIRI("TEWStriage:"+sexOfPatient.getAsString()))
+							.add(RDF.TYPE, factory.createIRI(namespace,sexOfPatient.getAsString()))
 							.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
 							.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()));
 				}
@@ -273,7 +269,6 @@ public class MedicalTriage
 	    	queryString += "WHERE\n";
 	    	queryString += "{\n";
 	    	queryString += "	?p a TEWStriage:Patient.\n";
-	    	//queryString += "	?p TEWStriage:TEWScodeOfPatient TEWStriage:"+nameOfCode+".\n";
 	    	queryString += "	?p TEWStriage:TEWScodeOfPatient ?c.\n";
 	    	queryString += "	?c a TEWStriage:"+nameOfCode+".\n";
 	    	queryString += "}\n";
@@ -349,9 +344,9 @@ public class MedicalTriage
 		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
 		queryString += "CONSTRUCT\n";
 		queryString += "{\n";
-		queryString += "?p TEWStriage:TEWScodeOfpatient TEWStriage:Green ";
-		//queryString += "	?code a TEWStriage:Green .\n";
-		//queryString += "	?p TEWStriage:TEWScodeOfPatient ?code .\n";
+		//queryString += "?p TEWStriage:TEWScodeOfpatient TEWStriage:Green ";
+		queryString += "	?code a TEWStriage:Green .\n";
+		queryString += "	?p TEWStriage:TEWScodeOfPatient ?code .\n";
 		queryString += "}\n";
 		queryString += "WHERE\n";
 		queryString += "{\n";
@@ -367,14 +362,10 @@ public class MedicalTriage
 		    {
 		        Statement statement = result.next();
 		        
-		        // Here you can process each statement in the result.
-		        // For example, you can retrieve the subject, predicate, and object from the statement.
 		        String subject = statement.getSubject().stringValue();
 		        String predicate = statement.getPredicate().stringValue();
 		        String object = statement.getObject().stringValue();
 
-		        // Do whatever processing you need with the subject, predicate, and object.
-		        // In this example, we will simply print them.
 		        System.out.println("Subject: " + subject);
 		        System.out.println("Predicate: " + predicate);
 		        System.out.println("Object: " + object);
@@ -410,7 +401,7 @@ public class MedicalTriage
 			// medicalTriage.TEWScalculation();
 			medicalTriage.SPARQLstretcherNeededQuery();
 			medicalTriage.SPARQLnumberOfDeathsQuery();
-			medicalTriage.constructionOfTEWScolourSPARQLqueries(); // it doesn't work yet
+			//medicalTriage.constructionOfTEWScolourSPARQLqueries(); // it doesn't work yet
 			medicalTriage.SPARQLtewsColourCodesQuery();
 			
 		}
