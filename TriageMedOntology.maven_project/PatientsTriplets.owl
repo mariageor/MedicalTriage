@@ -4,15 +4,11 @@
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#AVPUstate1">
-	<rdf:type rdf:resource="TEWStriage:Awake"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode1">
-	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Green"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Awake"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp1">
-	<rdf:type rdf:resource="TEWStriage:VitalSigns"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VitalSigns"/>
 	<TEWStriage:HR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">60</TEWStriage:HR>
 	<TEWStriage:RR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">18</TEWStriage:RR>
 	<TEWStriage:SBP rdf:datatype="http://www.w3.org/2001/XMLSchema#int">120</TEWStriage:SBP>
@@ -25,7 +21,6 @@
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Katerina Lagou</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate1"/>
-	<TEWStriage:TEWScodeOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#TEWScode1"/>
 	<TEWStriage:VitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp1"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:abilityOfMobility>
@@ -43,15 +38,11 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#AVPUstate3">
-	<rdf:type rdf:resource="TEWStriage:Awake"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode3">
-	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Green"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Awake"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp3">
-	<rdf:type rdf:resource="TEWStriage:VitalSigns"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VitalSigns"/>
 	<TEWStriage:HR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">107</TEWStriage:HR>
 	<TEWStriage:RR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">12</TEWStriage:RR>
 	<TEWStriage:SBP rdf:datatype="http://www.w3.org/2001/XMLSchema#int">130</TEWStriage:SBP>
@@ -64,7 +55,6 @@
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Ioanna Papakiriazi</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate3"/>
-	<TEWStriage:TEWScodeOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#TEWScode3"/>
 	<TEWStriage:VitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp3"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:abilityOfMobility>
@@ -89,15 +79,11 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#AVPUstate6">
-	<rdf:type rdf:resource="TEWStriage:Awake"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode6">
-	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Green"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Awake"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp6">
-	<rdf:type rdf:resource="TEWStriage:VitalSigns"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VitalSigns"/>
 	<TEWStriage:HR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">72</TEWStriage:HR>
 	<TEWStriage:RR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">11</TEWStriage:RR>
 	<TEWStriage:SBP rdf:datatype="http://www.w3.org/2001/XMLSchema#int">180</TEWStriage:SBP>
@@ -110,7 +96,6 @@
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Anastasios Gogos</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate6"/>
-	<TEWStriage:TEWScodeOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#TEWScode6"/>
 	<TEWStriage:VitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp6"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
@@ -121,15 +106,11 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#AVPUstate7">
-	<rdf:type rdf:resource="TEWStriage:Awake"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode7">
-	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Yellow"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Awake"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp7">
-	<rdf:type rdf:resource="TEWStriage:VitalSigns"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VitalSigns"/>
 	<TEWStriage:HR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">108</TEWStriage:HR>
 	<TEWStriage:RR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">19</TEWStriage:RR>
 	<TEWStriage:SBP rdf:datatype="http://www.w3.org/2001/XMLSchema#int">202</TEWStriage:SBP>
@@ -142,7 +123,6 @@
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Panagiotis Ioakim</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate7"/>
-	<TEWStriage:TEWScodeOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#TEWScode7"/>
 	<TEWStriage:VitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp7"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:abilityOfMobility>
@@ -153,15 +133,11 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#AVPUstate8">
-	<rdf:type rdf:resource="TEWStriage:Awake"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode8">
-	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Yellow"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Awake"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp8">
-	<rdf:type rdf:resource="TEWStriage:VitalSigns"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VitalSigns"/>
 	<TEWStriage:HR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">109</TEWStriage:HR>
 	<TEWStriage:RR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">35</TEWStriage:RR>
 	<TEWStriage:SBP rdf:datatype="http://www.w3.org/2001/XMLSchema#int">167</TEWStriage:SBP>
@@ -174,7 +150,6 @@
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Orestis Makris</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate8"/>
-	<TEWStriage:TEWScodeOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#TEWScode8"/>
 	<TEWStriage:VitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp8"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:abilityOfMobility>
@@ -185,15 +160,11 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#AVPUstate9">
-	<rdf:type rdf:resource="TEWStriage:Verbal"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode9">
-	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Yellow"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Verbal"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp9">
-	<rdf:type rdf:resource="TEWStriage:VitalSigns"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VitalSigns"/>
 	<TEWStriage:HR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">90</TEWStriage:HR>
 	<TEWStriage:RR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">10</TEWStriage:RR>
 	<TEWStriage:SBP rdf:datatype="http://www.w3.org/2001/XMLSchema#int">196</TEWStriage:SBP>
@@ -206,7 +177,6 @@
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Maria Atzaraki</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate9"/>
-	<TEWStriage:TEWScodeOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#TEWScode9"/>
 	<TEWStriage:VitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp9"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">3</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
@@ -217,15 +187,11 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#AVPUstate10">
-	<rdf:type rdf:resource="TEWStriage:Pain"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode10">
-	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Orange"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Pain"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp10">
-	<rdf:type rdf:resource="TEWStriage:VitalSigns"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VitalSigns"/>
 	<TEWStriage:HR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">78</TEWStriage:HR>
 	<TEWStriage:RR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">11</TEWStriage:RR>
 	<TEWStriage:SBP rdf:datatype="http://www.w3.org/2001/XMLSchema#int">158</TEWStriage:SBP>
@@ -238,7 +204,6 @@
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Andreas Nikolaou</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate10"/>
-	<TEWStriage:TEWScodeOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#TEWScode10"/>
 	<TEWStriage:VitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp10"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
@@ -249,15 +214,11 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#AVPUstate11">
-	<rdf:type rdf:resource="TEWStriage:Unresponsive"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode11">
-	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Orange"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Unresponsive"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp11">
-	<rdf:type rdf:resource="TEWStriage:VitalSigns"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VitalSigns"/>
 	<TEWStriage:HR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">79</TEWStriage:HR>
 	<TEWStriage:RR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">13</TEWStriage:RR>
 	<TEWStriage:SBP rdf:datatype="http://www.w3.org/2001/XMLSchema#int">95</TEWStriage:SBP>
@@ -270,7 +231,6 @@
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Kiriakos Spanos</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate11"/>
-	<TEWStriage:TEWScodeOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#TEWScode11"/>
 	<TEWStriage:VitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp11"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">6</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
@@ -281,15 +241,11 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#AVPUstate12">
-	<rdf:type rdf:resource="TEWStriage:Awake"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode12">
-	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Orange"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Awake"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp12">
-	<rdf:type rdf:resource="TEWStriage:VitalSigns"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VitalSigns"/>
 	<TEWStriage:HR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">123</TEWStriage:HR>
 	<TEWStriage:RR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">28</TEWStriage:RR>
 	<TEWStriage:SBP rdf:datatype="http://www.w3.org/2001/XMLSchema#int">198</TEWStriage:SBP>
@@ -302,7 +258,6 @@
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Danai Pappa</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate12"/>
-	<TEWStriage:TEWScodeOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#TEWScode12"/>
 	<TEWStriage:VitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp12"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
@@ -313,15 +268,11 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#AVPUstate13">
-	<rdf:type rdf:resource="TEWStriage:Pain"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode13">
-	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Red"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Pain"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp13">
-	<rdf:type rdf:resource="TEWStriage:VitalSigns"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VitalSigns"/>
 	<TEWStriage:HR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">100</TEWStriage:HR>
 	<TEWStriage:RR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">14</TEWStriage:RR>
 	<TEWStriage:SBP rdf:datatype="http://www.w3.org/2001/XMLSchema#int">195</TEWStriage:SBP>
@@ -334,7 +285,6 @@
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Stylianos Keimalis</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate13"/>
-	<TEWStriage:TEWScodeOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#TEWScode13"/>
 	<TEWStriage:VitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp13"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">7</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
@@ -345,15 +295,11 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#AVPUstate14">
-	<rdf:type rdf:resource="TEWStriage:Awake"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode14">
-	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Red"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Awake"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp14">
-	<rdf:type rdf:resource="TEWStriage:VitalSigns"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VitalSigns"/>
 	<TEWStriage:HR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">129</TEWStriage:HR>
 	<TEWStriage:RR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">29</TEWStriage:RR>
 	<TEWStriage:SBP rdf:datatype="http://www.w3.org/2001/XMLSchema#int">203</TEWStriage:SBP>
@@ -366,7 +312,6 @@
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Irida Karipidi</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate14"/>
-	<TEWStriage:TEWScodeOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#TEWScode14"/>
 	<TEWStriage:VitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp14"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">7</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
@@ -377,15 +322,11 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#AVPUstate15">
-	<rdf:type rdf:resource="TEWStriage:Unresponsive"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#TEWScode15">
-	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Red"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#Unresponsive"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://MedOntology.project.rdfs/TEWStriage#VSp15">
-	<rdf:type rdf:resource="TEWStriage:VitalSigns"/>
+	<rdf:type rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VitalSigns"/>
 	<TEWStriage:HR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">108</TEWStriage:HR>
 	<TEWStriage:RR rdf:datatype="http://www.w3.org/2001/XMLSchema#int">20</TEWStriage:RR>
 	<TEWStriage:SBP rdf:datatype="http://www.w3.org/2001/XMLSchema#int">199</TEWStriage:SBP>
@@ -398,7 +339,6 @@
 	<TEWStriage:deadPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:deadPatient>
 	<TEWStriage:patientsName>Leonidas Thanou</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate15"/>
-	<TEWStriage:TEWScodeOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#TEWScode15"/>
 	<TEWStriage:VitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp15"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">8</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>

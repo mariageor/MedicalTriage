@@ -87,7 +87,7 @@ public class MedicalTriage
 		//Model model = new TreeModel();
 		
 		// Reading the json file, which includes patients data
-		try(JsonReader reader = new JsonReader(new FileReader("C://PatientsData1.json")))
+		try(JsonReader reader = new JsonReader(new FileReader("C://PatientsData.json")))
 		{
 			JsonElement jsonElement = new JsonParser().parse(reader);
 			
@@ -129,10 +129,10 @@ public class MedicalTriage
 					JsonObject AVPUdata = patient.get("AVPUstateOfPatient").getAsJsonObject();
 					JsonElement AVPUstate = AVPUdata.get("type"); // it may be unecessary
 					    
-					JsonObject tewsCodeData = patient.get("TEWScodeOfPatient").getAsJsonObject(); //this one should be calculated by a SPARQL query
-					JsonElement tewsCode = tewsCodeData.get("type"); // it may be unecessary
+					//JsonObject tewsCodeData = patient.get("TEWScodeOfPatient").getAsJsonObject(); //this one should be calculated by a SPARQL query
+					//JsonElement tewsCode = tewsCodeData.get("type"); // it may be unecessary
 					    
-					JsonElement tewsScore = patient.get("TEWSscore"); //this one should be calculated by a SPARQL query
+					JsonElement tewsScore = patient.get("TEWSscore"); //this one should will take the right value in a SPARQL query above
 					System.out.println(tewsScore.getAsInt());
 					    
 					JsonObject VSdata = patient.get("VitalSignsOfPatient").getAsJsonObject();
@@ -153,7 +153,7 @@ public class MedicalTriage
 					JsonElement stretcher = patient.get("stretcherNeededOrImmobilePatient");
 					    
 					builder.subject(AVPUstateIRI).add(RDF.TYPE, factory.createIRI(namespace,AVPUstate.getAsString()));
-					builder.subject(TEWScodeIRI).add(RDF.TYPE, factory.createIRI(namespace,tewsCode.getAsString()));
+					//builder.subject(TEWScodeIRI).add(RDF.TYPE, factory.createIRI(namespace,tewsCode.getAsString()));
 					
 					builder.subject(vsIRI).add(RDF.TYPE, factory.createIRI(namespace,VStype.getAsString()))
 							.add("TEWStriage:HR", factory.createLiteral(HR.getAsInt()))
@@ -165,10 +165,9 @@ public class MedicalTriage
 							.add(RDF.TYPE, factory.createIRI(namespace, sexOfPatient.getAsString()))
 							.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
 							.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()))
-							.add("TEWStriage:AVPUstateOfPatient", AVPUstateIRI) //search it more
-							.add("TEWStriage:TEWScodeOfPatient", TEWScodeIRI) //search it more
-							//.add("TEWStriage:TEWScodeOfPatient", tewsCodeData) 
-							.add("TEWStriage:VitalSignsOfPatient", vsIRI) //search it more
+							.add("TEWStriage:AVPUstateOfPatient", AVPUstateIRI) 
+							//.add("TEWStriage:TEWScodeOfPatient", TEWScodeIRI) 
+							.add("TEWStriage:VitalSignsOfPatient", vsIRI) 
 							.add("TEWStriage:TEWSscore", factory.createLiteral(tewsScore.getAsInt()))
 							.add("TEWStriage:abilityOfMobility", factory.createLiteral(ableToWalk.getAsBoolean()))
 							.add("TEWStriage:existenceOfTrauma", factory.createLiteral(trauma.getAsBoolean()))
@@ -322,31 +321,19 @@ public class MedicalTriage
 	public void TEWScalculation()
 	{
 		// Here I have to check the ranges of the values of HR, RR, SBP, abilityOfMobility and AVPU.
-		// Latly, I have to construct the triplets about  the TEWSscore and TEWScolourCode
-		// and add them in the PatientsTriplets.owl for completeness.
 		
-		System.out.println("\nCalculating the results...");
-		
-		// Creating an RDF model with the base URI of the ontology
-		ModelBuilder builder = new ModelBuilder();
-		builder.setNamespace("TEWStriage", this.namespace);
-					
-		// Generating an instance of RDF value 
-		ValueFactory factory = SimpleValueFactory.getInstance();
-		
-		IRI TEWScodeIRI = factory.createIRI(namespace, "TEWScode_pX"); 
-		IRI TEWScolourIRI = factory.createIRI(namespace, "TEWScolourCode_pX"); 
 	}
 	
 	public void constructionOfTEWScolourSPARQLqueries()
 	{	
+		// Here, I have to construct the triples about  the TEWSscore and TEWScolourCode
+		// and add them in the PatientsTriplets.owl for completeness.
+		
 		System.out.println("\nConstructing data for patients with TEWS score between 0 and 2:"); // maybe it's unessecary
 		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
 		queryString += "CONSTRUCT\n";
 		queryString += "{\n";
-		//queryString += "?p TEWStriage:TEWScodeOfpatient TEWStriage:Green ";
-		queryString += "	?code a TEWStriage:Green .\n";
-		queryString += "	?p TEWStriage:TEWScodeOfPatient ?code .\n";
+		queryString += "	?p TEWStriage:TEWScodeOfPatient TEWStriage:Green\n";
 		queryString += "}\n";
 		queryString += "WHERE\n";
 		queryString += "{\n";
@@ -355,6 +342,7 @@ public class MedicalTriage
 		queryString += "    FILTER(?s >= 0 && ?s <= 2)\n";
 		queryString += "}";
 
+		//this.connection.prepareGraphQuery(queryString);
 		GraphQuery query = this.connection.prepareGraphQuery(queryString);
 
 		try (GraphQueryResult result = query.evaluate()) {
@@ -401,7 +389,8 @@ public class MedicalTriage
 			// medicalTriage.TEWScalculation();
 			medicalTriage.SPARQLstretcherNeededQuery();
 			medicalTriage.SPARQLnumberOfDeathsQuery();
-			//medicalTriage.constructionOfTEWScolourSPARQLqueries(); // it doesn't work yet
+			//medicalTriage.
+			medicalTriage.constructionOfTEWScolourSPARQLqueries(); // it doesn't work yet
 			medicalTriage.SPARQLtewsColourCodesQuery();
 			
 		}
