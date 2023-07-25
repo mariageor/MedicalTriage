@@ -165,9 +165,6 @@ TEWStriage:existenceOfTrauma
   rdfs:label "This property indicates a trauma to a patient." ;
   rdfs:range xsd:boolean ;
 .
-TEWStriage:green_p0
-  rdf:type TEWStriage:Green ;
-.
 TEWStriage:needsHelpToWalk
   rdf:type rdf:Property ;
   rdfs:domain TEWStriage:Patient ;
@@ -178,7 +175,6 @@ TEWStriage:needsHelpToWalk
 TEWStriage:p0
   rdf:type TEWStriage:FemalePatient ;
   TEWStriage:AVPUstateOfPatient TEWStriage:awake_p0 ;
-  TEWStriage:TEWScodeOfPatient TEWStriage:green_p0 ;
   TEWStriage:TEWSscore 1 ;
   TEWStriage:abilityOfMobility "true"^^xsd:boolean ;
   TEWStriage:ageOfPatient 21 ;

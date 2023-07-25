@@ -14,6 +14,7 @@ import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.impl.LinkedHashModel;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
@@ -324,12 +325,97 @@ public class MedicalTriage
 		
 	}
 	
+	
 	public void constructionOfTEWScolourSPARQLqueries()
+	{
+		System.out.println("\nReasoning...");
+		
+		// Creating an RDF model with the base URI of the ontology
+		ModelBuilder builder = new ModelBuilder();
+		builder.setNamespace("TEWStriage", this.namespace);
+					
+		// Generating an instance of RDF value 
+		SimpleValueFactory factory = SimpleValueFactory.getInstance();
+		
+		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
+		queryString += "SELECT ?p\n";
+		queryString += "WHERE\n";
+		queryString += "{\n";
+		queryString += "    ?p a TEWStriage:Patient .\n";
+		queryString += "	?p TEWStriage:deadPatient true.\n";
+		queryString += "}";
+		
+		TupleQuery query = this.connection.prepareTupleQuery(queryString);
+		
+		TupleQueryResult result = query.evaluate();
+		while (result.hasNext()) 
+		{
+			BindingSet bindingSet = result.next();
+			
+			IRI patientIRI = (IRI) bindingSet.getBinding("p").getValue();
+			String patientID = patientIRI.stringValue().substring(43);
+
+			
+			IRI TEWScodeIRI = factory.createIRI(namespace, "Blue" + patientID);
+			
+			builder.subject(TEWScodeIRI).add(RDF.TYPE, factory.createIRI(namespace, "Blue"));
+			builder.subject(patientIRI).add("TEWStriage:TEWScodeOfPatient", TEWScodeIRI);
+				
+		}
+		
+		Model model = builder.build();
+		this.connection.add(model);
+		
+		result.close();
+		
+		ColourCodes(builder, factory, model, "Green", 0, 2);
+		ColourCodes(builder, factory, model, "Yellow", 3, 4);
+		ColourCodes(builder, factory, model, "Orange", 5, 6);
+		ColourCodes(builder, factory, model, "Red", 7, 1000);
+	}
+	
+	
+	public void ColourCodes(ModelBuilder builder, SimpleValueFactory factory, Model model, String colour, Integer l1, Integer l2)
+	{
+		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
+		queryString += "SELECT ?p\n";
+		queryString += "WHERE\n";
+		queryString += "{\n";
+		queryString += "    ?p a TEWStriage:Patient .\n";
+		queryString += "    ?p TEWStriage:TEWSscore ?s.\n";
+		queryString += "    FILTER(?s >="+ l1 +"&& ?s <="+ l2 +")\n";
+		queryString += "}";
+		
+		TupleQuery query = this.connection.prepareTupleQuery(queryString);
+		
+		TupleQueryResult result = query.evaluate();
+		while (result.hasNext()) 
+		{
+			BindingSet bindingSet = result.next();
+			
+			IRI patientIRI = (IRI) bindingSet.getBinding("p").getValue();
+			String patientID = patientIRI.stringValue().substring(43);
+
+			
+			IRI TEWScodeIRI = factory.createIRI(namespace, colour + patientID);
+			
+			builder.subject(TEWScodeIRI).add(RDF.TYPE, factory.createIRI(namespace, colour));
+			builder.subject(patientIRI).add("TEWStriage:TEWScodeOfPatient", TEWScodeIRI);
+				
+		}
+		
+		model = builder.build();
+		this.connection.add(model);
+		
+		result.close();
+	}
+	
+	
+	public void constructionOfTEWScolourSPARQLqueries2()
 	{	
 		// Here, I have to construct the triples about  the TEWSscore and TEWScolourCode
 		// and add them in the PatientsTriplets.owl for completeness.
 		
-		System.out.println("\nConstructing data for patients with TEWS score between 0 and 2:"); // maybe it's unessecary
 		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
 		queryString += "CONSTRUCT\n";
 		queryString += "{\n";
@@ -347,8 +433,8 @@ public class MedicalTriage
 
 		try (GraphQueryResult result = query.evaluate()) {
 		    while (result.hasNext()) 
-		    {
-		        Statement statement = result.next();
+		    {   
+                Statement statement = result.next();
 		        
 		        String subject = statement.getSubject().stringValue();
 		        String predicate = statement.getPredicate().stringValue();
