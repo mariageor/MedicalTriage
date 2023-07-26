@@ -13,6 +13,7 @@ import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
+import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.LinkedHashModel;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
@@ -88,7 +89,7 @@ public class MedicalTriage
 		//Model model = new TreeModel();
 		
 		// Reading the json file, which includes patients data
-		try(JsonReader reader = new JsonReader(new FileReader("C://PatientsData.json")))
+		try(JsonReader reader = new JsonReader(new FileReader("C://test.json")))
 		{
 			JsonElement jsonElement = new JsonParser().parse(reader);
 			
@@ -113,7 +114,7 @@ public class MedicalTriage
 			    // Accessing the name element of every patient
 				JsonElement nameElement = patient.get("patientsName");
 				String name = nameElement.getAsString();
-				System.out.println("Patient"+i+": " + name);
+				System.out.println("Patient"+(i+1)+": " + name);
 				    
 				// Accessing the deadPatient element of every patient
 				JsonElement deadPatient = patient.get("deadPatient");
@@ -125,7 +126,7 @@ public class MedicalTriage
 				{	
 					IRI vsIRI = factory.createIRI(namespace, "VSp" + (i+1)); 
 				    IRI AVPUstateIRI = factory.createIRI(namespace, "AVPUstate" + (i+1)); 
-				    IRI TEWScodeIRI = factory.createIRI(namespace, "TEWScode" + (i+1));
+				    //IRI TEWScodeIRI = factory.createIRI(namespace, "TEWScode" + (i+1));
 					
 					JsonObject AVPUdata = patient.get("AVPUstateOfPatient").getAsJsonObject();
 					JsonElement AVPUstate = AVPUdata.get("type"); // it may be unecessary
@@ -134,7 +135,7 @@ public class MedicalTriage
 					//JsonElement tewsCode = tewsCodeData.get("type"); // it may be unecessary
 					    
 					JsonElement tewsScore = patient.get("TEWSscore"); //this one should will take the right value in a SPARQL query above
-					System.out.println(tewsScore.getAsInt());
+					//System.out.println(tewsScore.getAsInt());
 					    
 					JsonObject VSdata = patient.get("VitalSignsOfPatient").getAsJsonObject();
 					JsonElement VStype = VSdata.get("type"); // it may be unecessary
@@ -261,7 +262,7 @@ public class MedicalTriage
 	    while(iterator.hasNext()) 
 	    {
 	    	String nameOfCode = iterator.next();
-	    	System.out.print("The number of "+nameOfCode+" codes are: ");
+	    	System.out.print("Number of "+nameOfCode+" codes: ");
 
 			String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
 	    	
@@ -314,14 +315,6 @@ public class MedicalTriage
 				
 		}
 		result.close();
-		
-	}
-	
-	
-	
-	public void TEWScalculation()
-	{
-		// Here I have to check the ranges of the values of HR, RR, SBP, abilityOfMobility and AVPU.
 		
 	}
 	
@@ -452,6 +445,64 @@ public class MedicalTriage
 	}
 	
 	
+	public void TEWSscoreCalculationSPARQLqueries()
+	{
+		scoreCalculationForAVPU("Verbal", 1);
+		scoreCalculationForAVPU("Pain", 2);
+		scoreCalculationForAVPU("Unresponsive", 3);
+		scoreCalculationsForMobilityAndTrauma("stretcherNeededOrImmobilePatient", 2);
+		scoreCalculationsForMobilityAndTrauma("needsHelpToWalk", 1);
+		scoreCalculationsForMobilityAndTrauma("existenceOfTrauma", 1);
+	}
+	
+	
+	public void scoreCalculationForAVPU(String type, int num )
+	{
+		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
+		queryString += "SELECT ?p ((?score)+"+ num +" AS ?updatedValue)\n";
+		queryString += "WHERE\n";
+		queryString += "{\n";
+		queryString += "    ?p a TEWStriage:Patient .\n";
+		queryString += "    ?p TEWStriage:TEWSscore ?s.\n";
+		queryString += "    ?p TEWStriage:AVPUstateOfPatient ?avpu .\n";
+		queryString += "    ?avpu a TEWStriage:"+ type +" .\n";
+		queryString += "}";
+		
+		this.connection.prepareTupleQuery(queryString);
+		
+		/**TupleQuery query = this.connection.prepareTupleQuery(queryString);
+		
+		TupleQueryResult result = query.evaluate();
+		while (result.hasNext()) 
+		{
+			BindingSet bindingSet = result.next();
+			
+			Literal updatedValueLiteral = (Literal) bindingSet.getBinding("updatedValue").getValue();
+			int updatedValues = updatedValueLiteral.intValue();
+			System.out.println(updatedValues);
+				
+		}
+		
+		result.close();*/
+	}
+	
+	public void scoreCalculationsForMobilityAndTrauma(String type, int num)
+	{
+		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
+		queryString += "SELECT ?p ?updatedValue\n";
+		queryString += "WHERE\n";
+		queryString += "{\n";
+		queryString += "    ?p a TEWStriage:Patient .\n";
+		queryString += "    ?p TEWStriage:TEWSscore ?s.\n";
+		queryString += "    ?p TEWStriage:"+ type+" ?r .\n";
+		queryString += "    FILTER(?r=true) .\n";
+		queryString += "    BIND((?score+"+ num +") AS ?updatedValue)\n";
+		queryString += "}";
+		
+		this.connection.prepareTupleQuery(queryString);
+	}
+	
+	
 	public static void main(String[] args) throws RDFParseException, UnsupportedRDFormatException, IOException, URISyntaxException
 	{
 		// Access to a remote repository accessible over HTTP
@@ -472,11 +523,10 @@ public class MedicalTriage
 			connection.commit();
 			
 			// SPARQL queries
-			// medicalTriage.TEWScalculation();
 			medicalTriage.SPARQLstretcherNeededQuery();
 			medicalTriage.SPARQLnumberOfDeathsQuery();
-			//medicalTriage.
-			medicalTriage.constructionOfTEWScolourSPARQLqueries(); // it doesn't work yet
+			medicalTriage.TEWSscoreCalculationSPARQLqueries();
+			medicalTriage.constructionOfTEWScolourSPARQLqueries(); 
 			medicalTriage.SPARQLtewsColourCodesQuery();
 			
 		}
