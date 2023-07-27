@@ -13,16 +13,13 @@ import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
-import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.model.ValueFactory;
-import org.eclipse.rdf4j.model.impl.LinkedHashModel;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.query.BindingSet;
 import org.eclipse.rdf4j.query.GraphQuery;
 import org.eclipse.rdf4j.query.GraphQueryResult;
-import org.eclipse.rdf4j.query.QueryEvaluationException;
 import org.eclipse.rdf4j.query.TupleQuery;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
@@ -163,6 +160,7 @@ public class MedicalTriage
 							.add("TEWStriage:SBP", factory.createLiteral(SBP.getAsInt()))
 							.add("TEWStriage:temp", factory.createLiteral(temp.getAsInt()));
 					 
+					
 					builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:Patient"))
 							.add(RDF.TYPE, factory.createIRI(namespace, sexOfPatient.getAsString()))
 							.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
@@ -190,11 +188,11 @@ public class MedicalTriage
 			Model model = builder.build();
 			this.connection.add(model);
 		    
-			//Printing statements for debugging
-			//for(Statement st: model) 
-			//{
-				//System.out.println(st);
-			//}
+			/**Printing statements for debugging
+			for(Statement st: model) 
+			{
+				System.out.println(st);
+			}*/
 			
 			File file = new File("./PatientsTriplets.owl");
 			FileOutputStream out = new FileOutputStream(file);
@@ -370,7 +368,7 @@ public class MedicalTriage
 	
 	public void ColourCodes(ModelBuilder builder, SimpleValueFactory factory, Model model, String colour, Integer l1, Integer l2)
 	{
-		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
+		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>\n";
 		queryString += "SELECT ?p\n";
 		queryString += "WHERE\n";
 		queryString += "{\n";
@@ -409,7 +407,7 @@ public class MedicalTriage
 		// Here, I have to construct the triples about  the TEWSscore and TEWScolourCode
 		// and add them in the PatientsTriplets.owl for completeness.
 		
-		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
+		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#\n>";
 		queryString += "CONSTRUCT\n";
 		queryString += "{\n";
 		queryString += "	?p TEWStriage:TEWScodeOfPatient TEWStriage:Green\n";
@@ -447,19 +445,26 @@ public class MedicalTriage
 	
 	public void TEWSscoreCalculationSPARQLqueries()
 	{
-		scoreCalculationForAVPU("Verbal", 1);
-		scoreCalculationForAVPU("Pain", 2);
-		scoreCalculationForAVPU("Unresponsive", 3);
-		scoreCalculationsForMobilityAndTrauma("stretcherNeededOrImmobilePatient", 2);
-		scoreCalculationsForMobilityAndTrauma("needsHelpToWalk", 1);
-		scoreCalculationsForMobilityAndTrauma("existenceOfTrauma", 1);
+		// Creating an RDF model with the base URI of the ontology
+		ModelBuilder builder = new ModelBuilder();
+		builder.setNamespace("TEWStriage", this.namespace);
+							
+		// Generating an instance of RDF value 
+		SimpleValueFactory factory = SimpleValueFactory.getInstance();
+		
+		scoreCalculationForAVPU(builder, factory, "Verbal", 1);
+		scoreCalculationForAVPU(builder, factory, "Pain", 2);
+		scoreCalculationForAVPU(builder, factory, "Unresponsive", 3);
+		scoreCalculationsForMobilityAndTrauma(builder, factory, "stretcherNeededOrImmobilePatient", 2);
+		scoreCalculationsForMobilityAndTrauma(builder, factory, "needsHelpToWalk", 1);
+		scoreCalculationsForMobilityAndTrauma(builder, factory, "existenceOfTrauma", 1);
 	}
 	
 	
-	public void scoreCalculationForAVPU(String type, int num )
+	public void scoreCalculationForAVPU(ModelBuilder builder, SimpleValueFactory factory, String type, Integer num )
 	{
-		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
-		queryString += "SELECT ?p ((?score)+"+ num +" AS ?updatedValue)\n";
+		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>\n";
+		queryString += "SELECT ?p ?s\n";
 		queryString += "WHERE\n";
 		queryString += "{\n";
 		queryString += "    ?p a TEWStriage:Patient .\n";
@@ -468,38 +473,67 @@ public class MedicalTriage
 		queryString += "    ?avpu a TEWStriage:"+ type +" .\n";
 		queryString += "}";
 		
-		this.connection.prepareTupleQuery(queryString);
+		TupleQuery query = this.connection.prepareTupleQuery(queryString);
 		
-		/**TupleQuery query = this.connection.prepareTupleQuery(queryString);
-		
+		System.out.println("---");
 		TupleQueryResult result = query.evaluate();
 		while (result.hasNext()) 
 		{
 			BindingSet bindingSet = result.next();
 			
-			Literal updatedValueLiteral = (Literal) bindingSet.getBinding("updatedValue").getValue();
-			int updatedValues = updatedValueLiteral.intValue();
-			System.out.println(updatedValues);
-				
+			IRI patientIRI = (IRI) bindingSet.getBinding("p").getValue();
+			Literal scoreLiteral = (Literal) bindingSet.getBinding("s").getValue();
+			int previousScore = scoreLiteral.intValue();
+			System.out.println(patientIRI);
+			
+			this.connection.remove(patientIRI, factory.createIRI("http://MedOntology.project.rdfs/TEWStriage#TEWSscore"), scoreLiteral);
+			this.connection
+				.add(patientIRI, factory.createIRI("http://MedOntology.project.rdfs/TEWStriage#TEWSscore"), factory.createLiteral(previousScore+num));
+			/**builder.subject(patientIRI).add("TEWStriage:TEWSscore", factory.createLiteral(previousScore+num));
+			
+			Model model = builder.build();
+			this.connection.add(model);*/
 		}
 		
-		result.close();*/
+		result.close();
 	}
 	
-	public void scoreCalculationsForMobilityAndTrauma(String type, int num)
+	
+	public void scoreCalculationsForMobilityAndTrauma(ModelBuilder builder, SimpleValueFactory factory, String type, int num)
 	{
-		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>";
-		queryString += "SELECT ?p ?updatedValue\n";
+		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>\n";
+		queryString += "SELECT ?p ?s\n";
 		queryString += "WHERE\n";
 		queryString += "{\n";
 		queryString += "    ?p a TEWStriage:Patient .\n";
 		queryString += "    ?p TEWStriage:TEWSscore ?s.\n";
-		queryString += "    ?p TEWStriage:"+ type+" ?r .\n";
+		queryString += "    ?p TEWStriage:"+ type +" ?r .\n";
 		queryString += "    FILTER(?r=true) .\n";
-		queryString += "    BIND((?score+"+ num +") AS ?updatedValue)\n";
 		queryString += "}";
 		
-		this.connection.prepareTupleQuery(queryString);
+		TupleQuery query  = this.connection.prepareTupleQuery(queryString);
+		
+		System.out.println("---");
+		TupleQueryResult result = query.evaluate();
+		while (result.hasNext()) 
+		{
+			BindingSet bindingSet = result.next();
+			
+			IRI patientIRI = (IRI) bindingSet.getBinding("p").getValue();
+			Literal scoreLiteral = (Literal) bindingSet.getBinding("s").getValue();
+			int previousScore = scoreLiteral.intValue();
+			System.out.println(patientIRI);
+			
+			this.connection.remove(patientIRI, factory.createIRI("http://MedOntology.project.rdfs/TEWStriage#TEWSscore"), scoreLiteral);
+			this.connection
+				.add(patientIRI, factory.createIRI("http://MedOntology.project.rdfs/TEWStriage#TEWSscore"), factory.createLiteral(previousScore+num));
+			/**builder.subject(patientIRI).add("TEWStriage:TEWSscore", factory.createLiteral(previousScore+num));
+			
+			Model model = builder.build();
+			this.connection.add(model);*/
+		}
+		
+		result.close();
 	}
 	
 	
