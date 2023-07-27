@@ -458,10 +458,54 @@ public class MedicalTriage
 		scoreCalculationsForMobilityAndTrauma(builder, factory, "stretcherNeededOrImmobilePatient", 2);
 		scoreCalculationsForMobilityAndTrauma(builder, factory, "needsHelpToWalk", 1);
 		scoreCalculationsForMobilityAndTrauma(builder, factory, "existenceOfTrauma", 1);
+		scoreCalculationForVS(builder, factory, "SBP", 1, "?x>= 81 && ?x<= 100");
+		scoreCalculationForVS(builder, factory, "SBP", 2, "?x>= 71 && ?x<= 80) || ?x>199");
+		scoreCalculationForVS(builder, factory, "SBP", 3, "?x<71");
+		scoreCalculationForVS(builder, factory, "temperature", 2, "?x<35 || ?x>38.5");
+		scoreCalculationForVS(builder, factory, "HR", 1, "?x>=41 && ?x<=50) || (?x>=101 && ?x<=110)");
+		scoreCalculationForVS(builder, factory, "HR", 2, "?x<41 || (?x>=111 && ?x<=129)");
+		scoreCalculationForVS(builder, factory, "HR", 3, "?x>129");
+		scoreCalculationForVS(builder, factory, "RR", 1, "?x>=15 && ?x<=20");
+		scoreCalculationForVS(builder, factory, "RR", 2, "?x<9 || (?x>=21 && ?x<=29)");
+		scoreCalculationForVS(builder, factory, "RR", 3, "?x>129");
 	}
 	
 	
-	public void scoreCalculationForAVPU(ModelBuilder builder, SimpleValueFactory factory, String type, Integer num )
+	public void scoreCalculationForVS(ModelBuilder builder, SimpleValueFactory factory, String type, int num, String condition )
+	{
+		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>\n";
+		queryString += "SELECT ?p ?s\n";
+		queryString += "WHERE\n";
+		queryString += "{\n";
+		queryString += "    ?p a TEWStriage:Patient .\n";
+		queryString += "    ?p TEWStriage:TEWSscore ?s.\n";
+		queryString += "    ?p TEWStriage:"+ type +" ?x .\n";
+		queryString += "    FILTER("+ condition +") .\n";
+		queryString += "}";
+		
+		TupleQuery query = this.connection.prepareTupleQuery(queryString);
+		
+		System.out.println("---");
+		TupleQueryResult result = query.evaluate();
+		while (result.hasNext()) 
+		{
+			BindingSet bindingSet = result.next();
+			
+			IRI patientIRI = (IRI) bindingSet.getBinding("p").getValue();
+			Literal scoreLiteral = (Literal) bindingSet.getBinding("s").getValue();
+			int previousScore = scoreLiteral.intValue();
+			System.out.println(patientIRI);
+			
+			this.connection.remove(patientIRI, factory.createIRI("http://MedOntology.project.rdfs/TEWStriage#TEWSscore"), scoreLiteral);
+			this.connection
+				.add(patientIRI, factory.createIRI("http://MedOntology.project.rdfs/TEWStriage#TEWSscore"), factory.createLiteral(previousScore+num));
+		}
+		
+		result.close();
+	}
+	
+	
+	public void scoreCalculationForAVPU(ModelBuilder builder, SimpleValueFactory factory, String type, int num )
 	{
 		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>\n";
 		queryString += "SELECT ?p ?s\n";
