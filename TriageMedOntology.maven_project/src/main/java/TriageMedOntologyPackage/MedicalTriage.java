@@ -158,7 +158,7 @@ public class MedicalTriage
 							.add("TEWStriage:HR", factory.createLiteral(HR.getAsInt()))
 							.add("TEWStriage:RR", factory.createLiteral(RR.getAsInt()))
 							.add("TEWStriage:SBP", factory.createLiteral(SBP.getAsInt()))
-							.add("TEWStriage:temp", factory.createLiteral(temp.getAsInt()));
+							.add("TEWStriage:temperature", factory.createLiteral(temp.getAsFloat()));
 					 
 					
 					builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:Patient"))
@@ -167,7 +167,7 @@ public class MedicalTriage
 							.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()))
 							.add("TEWStriage:AVPUstateOfPatient", AVPUstateIRI) 
 							//.add("TEWStriage:TEWScodeOfPatient", TEWScodeIRI) 
-							.add("TEWStriage:VitalSignsOfPatient", vsIRI) 
+							.add("TEWStriage:vitalSignsOfPatient", vsIRI) 
 							.add("TEWStriage:TEWSscore", factory.createLiteral(tewsScore.getAsInt()))
 							.add("TEWStriage:abilityOfMobility", factory.createLiteral(ableToWalk.getAsBoolean()))
 							.add("TEWStriage:existenceOfTrauma", factory.createLiteral(trauma.getAsBoolean()))
@@ -362,7 +362,7 @@ public class MedicalTriage
 		ColourCodes(builder, factory, model, "Green", 0, 2);
 		ColourCodes(builder, factory, model, "Yellow", 3, 4);
 		ColourCodes(builder, factory, model, "Orange", 5, 6);
-		ColourCodes(builder, factory, model, "Red", 7, 1000);
+		ColourCodes(builder, factory, model, "Red", 7, 100);
 	}
 	
 	
@@ -374,7 +374,7 @@ public class MedicalTriage
 		queryString += "{\n";
 		queryString += "    ?p a TEWStriage:Patient .\n";
 		queryString += "    ?p TEWStriage:TEWSscore ?s.\n";
-		queryString += "    FILTER(?s >="+ l1 +"&& ?s <="+ l2 +")\n";
+		queryString += "    FILTER(?s>="+ l1 +"&& ?s<="+ l2 +")\n";
 		queryString += "}";
 		
 		TupleQuery query = this.connection.prepareTupleQuery(queryString);
@@ -387,59 +387,15 @@ public class MedicalTriage
 			IRI patientIRI = (IRI) bindingSet.getBinding("p").getValue();
 			String patientID = patientIRI.stringValue().substring(43);
 
-			
 			IRI TEWScodeIRI = factory.createIRI(namespace, colour + patientID);
-			
 			builder.subject(TEWScodeIRI).add(RDF.TYPE, factory.createIRI(namespace, colour));
-			builder.subject(patientIRI).add("TEWStriage:TEWScodeOfPatient", TEWScodeIRI);
-				
+			builder.subject(patientIRI).add("TEWStriage:TEWScodeOfPatient", TEWScodeIRI);			
 		}
 		
 		model = builder.build();
 		this.connection.add(model);
 		
 		result.close();
-	}
-	
-	
-	public void constructionOfTEWScolourSPARQLqueries2()
-	{	
-		// Here, I have to construct the triples about  the TEWSscore and TEWScolourCode
-		// and add them in the PatientsTriplets.owl for completeness.
-		
-		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#\n>";
-		queryString += "CONSTRUCT\n";
-		queryString += "{\n";
-		queryString += "	?p TEWStriage:TEWScodeOfPatient TEWStriage:Green\n";
-		queryString += "}\n";
-		queryString += "WHERE\n";
-		queryString += "{\n";
-		queryString += "    ?p a TEWStriage:Patient .\n";
-		queryString += "    ?p TEWStriage:TEWSscore ?s.\n";
-		queryString += "    FILTER(?s >= 0 && ?s <= 2)\n";
-		queryString += "}";
-
-		//this.connection.prepareGraphQuery(queryString);
-		GraphQuery query = this.connection.prepareGraphQuery(queryString);
-
-		try (GraphQueryResult result = query.evaluate()) {
-		    while (result.hasNext()) 
-		    {   
-                Statement statement = result.next();
-		        
-		        String subject = statement.getSubject().stringValue();
-		        String predicate = statement.getPredicate().stringValue();
-		        String object = statement.getObject().stringValue();
-
-		        System.out.println("Subject: " + subject);
-		        System.out.println("Predicate: " + predicate);
-		        System.out.println("Object: " + object);
-		        System.out.println("-----------");
-		    }
-		} catch (Exception e) {
-		    // Handle any exceptions that may occur during query evaluation.
-		    e.printStackTrace();
-		}
 	}
 	
 	
@@ -455,19 +411,29 @@ public class MedicalTriage
 		scoreCalculationForAVPU(builder, factory, "Verbal", 1);
 		scoreCalculationForAVPU(builder, factory, "Pain", 2);
 		scoreCalculationForAVPU(builder, factory, "Unresponsive", 3);
+		
 		scoreCalculationsForMobilityAndTrauma(builder, factory, "stretcherNeededOrImmobilePatient", 2);
 		scoreCalculationsForMobilityAndTrauma(builder, factory, "needsHelpToWalk", 1);
 		scoreCalculationsForMobilityAndTrauma(builder, factory, "existenceOfTrauma", 1);
-		scoreCalculationForVS(builder, factory, "SBP", 1, "?x>= 81 && ?x<= 100");
-		scoreCalculationForVS(builder, factory, "SBP", 2, "?x>= 71 && ?x<= 80) || ?x>199");
+		
+		scoreCalculationForVS(builder, factory, "SBP", 1, "?x>=81 && ?x<=100");
+		scoreCalculationForVS(builder, factory, "SBP", 2, "?x>=71 && ?x<=80");
+		scoreCalculationForVS(builder, factory, "SBP", 2, "?x>199");
 		scoreCalculationForVS(builder, factory, "SBP", 3, "?x<71");
-		scoreCalculationForVS(builder, factory, "temperature", 2, "?x<35 || ?x>38.5");
-		scoreCalculationForVS(builder, factory, "HR", 1, "?x>=41 && ?x<=50) || (?x>=101 && ?x<=110)");
-		scoreCalculationForVS(builder, factory, "HR", 2, "?x<41 || (?x>=111 && ?x<=129)");
+		
+		scoreCalculationForVS(builder, factory, "temperature", 2, "?x<35");
+		scoreCalculationForVS(builder, factory, "temperature", 2, "?x>=38.5");
+
+		scoreCalculationForVS(builder, factory, "HR", 1, "?x>=41 && ?x<=50");
+		scoreCalculationForVS(builder, factory, "HR", 1, "?x>=101 && ?x<=110");
+		scoreCalculationForVS(builder, factory, "HR", 2, "?x<41");
+		scoreCalculationForVS(builder, factory, "HR", 2,"?x>=111 && ?x<=129");
 		scoreCalculationForVS(builder, factory, "HR", 3, "?x>129");
+		
 		scoreCalculationForVS(builder, factory, "RR", 1, "?x>=15 && ?x<=20");
-		scoreCalculationForVS(builder, factory, "RR", 2, "?x<9 || (?x>=21 && ?x<=29)");
-		scoreCalculationForVS(builder, factory, "RR", 3, "?x>129");
+		scoreCalculationForVS(builder, factory, "RR", 2, "?x<9");
+		scoreCalculationForVS(builder, factory, "RR", 2, "?x>=21 && ?x<=29");
+		scoreCalculationForVS(builder, factory, "RR", 3, "?x>29");
 	}
 	
 	
@@ -479,8 +445,9 @@ public class MedicalTriage
 		queryString += "{\n";
 		queryString += "    ?p a TEWStriage:Patient .\n";
 		queryString += "    ?p TEWStriage:TEWSscore ?s.\n";
-		queryString += "    ?p TEWStriage:"+ type +" ?x .\n";
-		queryString += "    FILTER("+ condition +") .\n";
+		queryString += "	?p TEWStriage:vitalSignsOfPatient ?vs .";
+		queryString += "    ?vs TEWStriage:"+ type +" ?x .\n";
+		queryString += "    FILTER("+ condition +") \n";
 		queryString += "}";
 		
 		TupleQuery query = this.connection.prepareTupleQuery(queryString);
@@ -494,7 +461,8 @@ public class MedicalTriage
 			IRI patientIRI = (IRI) bindingSet.getBinding("p").getValue();
 			Literal scoreLiteral = (Literal) bindingSet.getBinding("s").getValue();
 			int previousScore = scoreLiteral.intValue();
-			System.out.println(patientIRI);
+			//System.out.println(patientIRI);
+			//System.out.println(previousScore);
 			
 			this.connection.remove(patientIRI, factory.createIRI("http://MedOntology.project.rdfs/TEWStriage#TEWSscore"), scoreLiteral);
 			this.connection
@@ -528,7 +496,7 @@ public class MedicalTriage
 			IRI patientIRI = (IRI) bindingSet.getBinding("p").getValue();
 			Literal scoreLiteral = (Literal) bindingSet.getBinding("s").getValue();
 			int previousScore = scoreLiteral.intValue();
-			System.out.println(patientIRI);
+			//System.out.println(patientIRI);
 			
 			this.connection.remove(patientIRI, factory.createIRI("http://MedOntology.project.rdfs/TEWStriage#TEWSscore"), scoreLiteral);
 			this.connection
@@ -552,7 +520,7 @@ public class MedicalTriage
 		queryString += "    ?p a TEWStriage:Patient .\n";
 		queryString += "    ?p TEWStriage:TEWSscore ?s.\n";
 		queryString += "    ?p TEWStriage:"+ type +" ?r .\n";
-		queryString += "    FILTER(?r=true) .\n";
+		queryString += "    FILTER(?r=true) \n";
 		queryString += "}";
 		
 		TupleQuery query  = this.connection.prepareTupleQuery(queryString);
@@ -566,7 +534,7 @@ public class MedicalTriage
 			IRI patientIRI = (IRI) bindingSet.getBinding("p").getValue();
 			Literal scoreLiteral = (Literal) bindingSet.getBinding("s").getValue();
 			int previousScore = scoreLiteral.intValue();
-			System.out.println(patientIRI);
+			//System.out.println(patientIRI);
 			
 			this.connection.remove(patientIRI, factory.createIRI("http://MedOntology.project.rdfs/TEWStriage#TEWSscore"), scoreLiteral);
 			this.connection
