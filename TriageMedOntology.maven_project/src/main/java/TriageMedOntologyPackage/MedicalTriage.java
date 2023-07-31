@@ -12,14 +12,10 @@ import java.util.List;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Statement;
-import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.query.BindingSet;
-import org.eclipse.rdf4j.query.GraphQuery;
-import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.TupleQuery;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
@@ -37,7 +33,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
 /**
- * 
+ * This class is 
  * @author Maria-Georgia Georgiadou
  * @version 1.0
  * @since 2023-05-10
@@ -47,6 +43,7 @@ public class MedicalTriage
 {
 	private RepositoryConnection connection;
 	private String namespace;
+	
 	
 	/**
 	 * Constructor of the class MedicalTriage
@@ -58,15 +55,17 @@ public class MedicalTriage
 		this.namespace = "http://MedOntology.project.rdfs/TEWStriage#";
 	}
 	
+	
 	/**
-	 * 
+	 * This function loads the ontology from the file TEWStriage.ttl and adds
+	 * it to the connection that has been made to the repository in GraphDB.
 	 * @throws RDFParseException
 	 * @throws RepositoryException
 	 * @throws IOException
 	 */
 	public void loadOntology() throws RDFParseException, RepositoryException, IOException 
 	{
-		System.out.println("Loading the ontology...");
+		System.out.println("Loading the ontology...\n");
     	
 		this.connection.begin();
 		
@@ -74,19 +73,20 @@ public class MedicalTriage
 		this.connection.add(MedicalTriage.class.getResourceAsStream("/TEWStriage.ttl"), "urn:base", RDFFormat.TURTLE);
 	}
 	
+	
 	/**
-	 * 
+	 * This function is loading new instances to the ontology from the file PatientsData.json.
+	 * In addition, it makes a model with all of the new triplets, which is added in  the 
+	 * connection to the GraphDB repository, conducting all the necessary checks.
 	 * @throws IOException
 	 * @throws URISyntaxException
 	 */
 	public void loadInstances() throws IOException, URISyntaxException
 	{
-		System.out.println("Loading new instances...");
-		
-		//Model model = new TreeModel();
+		System.out.println("Loading new instances...\n");
 		
 		// Reading the json file, which includes patients data
-		try(JsonReader reader = new JsonReader(new FileReader("C://test.json")))
+		try(JsonReader reader = new JsonReader(new FileReader("C://PatientsData.json")))
 		{
 			JsonElement jsonElement = new JsonParser().parse(reader);
 			
@@ -122,20 +122,15 @@ public class MedicalTriage
 				if (!dead)
 				{	
 					IRI vsIRI = factory.createIRI(namespace, "VSp" + (i+1)); 
-				    IRI AVPUstateIRI = factory.createIRI(namespace, "AVPUstate" + (i+1)); 
-				    //IRI TEWScodeIRI = factory.createIRI(namespace, "TEWScode" + (i+1));
+				    IRI AVPUstateIRI = factory.createIRI(namespace, "AVPUstate" + (i+1));
 					
 					JsonObject AVPUdata = patient.get("AVPUstateOfPatient").getAsJsonObject();
-					JsonElement AVPUstate = AVPUdata.get("type"); // it may be unecessary
-					    
-					//JsonObject tewsCodeData = patient.get("TEWScodeOfPatient").getAsJsonObject(); //this one should be calculated by a SPARQL query
-					//JsonElement tewsCode = tewsCodeData.get("type"); // it may be unecessary
-					    
-					JsonElement tewsScore = patient.get("TEWSscore"); //this one should will take the right value in a SPARQL query above
-					//System.out.println(tewsScore.getAsInt());
+					JsonElement AVPUstate = AVPUdata.get("type"); 
+					
+					JsonElement tewsScore = patient.get("TEWSscore"); 
 					    
 					JsonObject VSdata = patient.get("VitalSignsOfPatient").getAsJsonObject();
-					JsonElement VStype = VSdata.get("type"); // it may be unecessary
+					JsonElement VStype = VSdata.get("type"); 
 					JsonElement HR = VSdata.get("HR");
 					JsonElement RR = VSdata.get("RR");
 					JsonElement SBP = VSdata.get("SBP");
@@ -150,23 +145,21 @@ public class MedicalTriage
 					JsonElement needsHelpToWalk = patient.get("needsHelpToWalk");
 					    
 					JsonElement stretcher = patient.get("stretcherNeededOrImmobilePatient");
-					    
+					   
+					// Creating and adding all the new triples to the model builder
 					builder.subject(AVPUstateIRI).add(RDF.TYPE, factory.createIRI(namespace,AVPUstate.getAsString()));
-					//builder.subject(TEWScodeIRI).add(RDF.TYPE, factory.createIRI(namespace,tewsCode.getAsString()));
 					
 					builder.subject(vsIRI).add(RDF.TYPE, factory.createIRI(namespace,VStype.getAsString()))
 							.add("TEWStriage:HR", factory.createLiteral(HR.getAsInt()))
 							.add("TEWStriage:RR", factory.createLiteral(RR.getAsInt()))
 							.add("TEWStriage:SBP", factory.createLiteral(SBP.getAsInt()))
 							.add("TEWStriage:temperature", factory.createLiteral(temp.getAsFloat()));
-					 
 					
 					builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:Patient"))
 							.add(RDF.TYPE, factory.createIRI(namespace, sexOfPatient.getAsString()))
 							.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
 							.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()))
-							.add("TEWStriage:AVPUstateOfPatient", AVPUstateIRI) 
-							//.add("TEWStriage:TEWScodeOfPatient", TEWScodeIRI) 
+							.add("TEWStriage:AVPUstateOfPatient", AVPUstateIRI)
 							.add("TEWStriage:vitalSignsOfPatient", vsIRI) 
 							.add("TEWStriage:TEWSscore", factory.createLiteral(tewsScore.getAsInt()))
 							.add("TEWStriage:abilityOfMobility", factory.createLiteral(ableToWalk.getAsBoolean()))
@@ -185,15 +178,18 @@ public class MedicalTriage
 				
 			}
 			
+			// Constructing the new model and adding it to the connection to the GraphDB repository
 			Model model = builder.build();
 			this.connection.add(model);
 		    
-			/**Printing statements for debugging
-			for(Statement st: model) 
+			// Printing statements for debugging
+			/**for(Statement st: model) 
 			{
 				System.out.println(st);
 			}*/
 			
+			
+			// Saving all the output in the PatientsTriplets.owl file
 			File file = new File("./PatientsTriplets.owl");
 			FileOutputStream out = new FileOutputStream(file);
 			try {
@@ -205,8 +201,8 @@ public class MedicalTriage
 			}
 			
 			// This is needed only if you want to find the exact location of the file created above
-			//String currentWorkingDirectory = System.getProperty("user.dir");
-			//System.out.println("Current working directory: " + currentWorkingDirectory);
+			/**String currentWorkingDirectory = System.getProperty("user.dir");
+			System.out.println("Current working directory: " + currentWorkingDirectory);*/
 		}
 		catch (Exception e) 
 		{
@@ -217,6 +213,10 @@ public class MedicalTriage
 	}
 	
 	
+	/**
+	 * This function provides the number of the dead 
+	 * patients through the appropriate SPARQL query.
+	 */
 	public void SPARQLnumberOfDeathsQuery()
 	{
 		System.out.print("\nNumber of deaths: ");
@@ -245,10 +245,14 @@ public class MedicalTriage
 	}
 	
 	
+	/**
+	 * This function is using the appropriate SPARQL query to provide and print out 
+	 * the total number of patients, that belong in every TEWS colour code. 
+	 */
 	public void SPARQLtewsColourCodesQuery()
 	{
 		List<String> colours = new ArrayList<String>();
-		colours.add("Blue"); // it should have the same results as the number of deaths query
+		colours.add("Blue");
 		colours.add("Green");
 		colours.add("Yellow");
 		colours.add("Orange");
@@ -289,6 +293,11 @@ public class MedicalTriage
 	}
 	
 	
+	/**
+	 * This function provides the number of the stretchers tha are needed 
+	 * in the field of the mass disaster, in order to help the immobile patients,
+	 * through the appropriate SPARQL query.
+	 */
 	public void SPARQLstretcherNeededQuery()
 	{
 		System.out.print("\nThe number of strechers needed is: ");
@@ -317,6 +326,10 @@ public class MedicalTriage
 	}
 	
 	
+	/**
+	 * In this function are constructed all the triples about the TEWS codes 
+	 * of the patinets, through a SPARQL query and all the other necessary actions. 
+	 */
 	public void constructionOfTEWScolourSPARQLqueries()
 	{
 		System.out.println("\nReasoning...");
@@ -366,6 +379,16 @@ public class MedicalTriage
 	}
 	
 	
+	/**
+	 * This function is used to check in which TEWS colour 
+	 * code every patient belongs, based to it's TEWS score.
+	 * @param builder the model builder 
+	 * @param factory the SimpleValueFactory object that creates the IRIs
+	 * @param model the model object
+	 * @param colour the string that indicates the TEWS colour code 
+	 * @param l1 the first limit of the expression that is used
+	 * @param l2 the second limit that is used
+	 */
 	public void ColourCodes(ModelBuilder builder, SimpleValueFactory factory, Model model, String colour, Integer l1, Integer l2)
 	{
 		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>\n";
@@ -399,6 +422,10 @@ public class MedicalTriage
 	}
 	
 	
+	/**
+	 * This function calls all the other necessary functions to calculate the total 
+	 * TEWS score of every patient through successive SPARQL queries.
+	 */
 	public void TEWSscoreCalculationSPARQLqueries()
 	{
 		// Creating an RDF model with the base URI of the ontology
@@ -437,6 +464,15 @@ public class MedicalTriage
 	}
 	
 	
+	/**
+	 * This function is adding the proper number to the TEWS score of every patient, 
+	 * based on the values of his vital signs. 
+	 * @param builder the model builder
+	 * @param factory the SimpleValueFactory object that creates the IRIs
+	 * @param type the string that indicates the specific vital sign of the query
+	 * @param num the integer that should be added to the score, if the condition is met
+	 * @param condition the string with the condition that must be met 
+	 */
 	public void scoreCalculationForVS(ModelBuilder builder, SimpleValueFactory factory, String type, int num, String condition )
 	{
 		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>\n";
@@ -451,9 +487,8 @@ public class MedicalTriage
 		queryString += "}";
 		
 		TupleQuery query = this.connection.prepareTupleQuery(queryString);
-		
-		System.out.println("---");
 		TupleQueryResult result = query.evaluate();
+		
 		while (result.hasNext()) 
 		{
 			BindingSet bindingSet = result.next();
@@ -461,8 +496,6 @@ public class MedicalTriage
 			IRI patientIRI = (IRI) bindingSet.getBinding("p").getValue();
 			Literal scoreLiteral = (Literal) bindingSet.getBinding("s").getValue();
 			int previousScore = scoreLiteral.intValue();
-			//System.out.println(patientIRI);
-			//System.out.println(previousScore);
 			
 			this.connection.remove(patientIRI, factory.createIRI("http://MedOntology.project.rdfs/TEWStriage#TEWSscore"), scoreLiteral);
 			this.connection
@@ -473,7 +506,15 @@ public class MedicalTriage
 	}
 	
 	
-	public void scoreCalculationForAVPU(ModelBuilder builder, SimpleValueFactory factory, String type, int num )
+	/**
+	 * This function is adding the proper number to the TEWS score of every patient, 
+	 * based on the values of his AVPU (Awake, Verbal, Pain, Unresponsive) state. 
+	 * @param builder the model builder
+	 * @param factory the SimpleValueFactory object that creates the IRIs
+	 * @param type the string that indicates the specific AVPU state of the query
+	 * @param num the integer that should be added to the score, if the condition is met
+	 */ 
+	void scoreCalculationForAVPU(ModelBuilder builder, SimpleValueFactory factory, String type, int num )
 	{
 		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>\n";
 		queryString += "SELECT ?p ?s\n";
@@ -486,9 +527,8 @@ public class MedicalTriage
 		queryString += "}";
 		
 		TupleQuery query = this.connection.prepareTupleQuery(queryString);
-		
-		System.out.println("---");
 		TupleQueryResult result = query.evaluate();
+		
 		while (result.hasNext()) 
 		{
 			BindingSet bindingSet = result.next();
@@ -496,21 +536,24 @@ public class MedicalTriage
 			IRI patientIRI = (IRI) bindingSet.getBinding("p").getValue();
 			Literal scoreLiteral = (Literal) bindingSet.getBinding("s").getValue();
 			int previousScore = scoreLiteral.intValue();
-			//System.out.println(patientIRI);
 			
 			this.connection.remove(patientIRI, factory.createIRI("http://MedOntology.project.rdfs/TEWStriage#TEWSscore"), scoreLiteral);
 			this.connection
 				.add(patientIRI, factory.createIRI("http://MedOntology.project.rdfs/TEWStriage#TEWSscore"), factory.createLiteral(previousScore+num));
-			/**builder.subject(patientIRI).add("TEWStriage:TEWSscore", factory.createLiteral(previousScore+num));
-			
-			Model model = builder.build();
-			this.connection.add(model);*/
 		}
 		
 		result.close();
 	}
 	
 	
+	/**
+	 * This function is adding the proper number to the TEWS score of every patient, 
+	 * based on his state of mobility and the existence of trauma or not. 
+	 * @param builder the model builder
+	 * @param factory the SimpleValueFactory object that creates the IRIs
+	 * @param type the string that indicates the specific mobility state of the patient or the existence of trauma
+	 * @param num the integer that should be added to the score, if the condition is met
+	 */
 	public void scoreCalculationsForMobilityAndTrauma(ModelBuilder builder, SimpleValueFactory factory, String type, int num)
 	{
 		String queryString = "PREFIX TEWStriage: <http://MedOntology.project.rdfs/TEWStriage#>\n";
@@ -524,9 +567,8 @@ public class MedicalTriage
 		queryString += "}";
 		
 		TupleQuery query  = this.connection.prepareTupleQuery(queryString);
-		
-		System.out.println("---");
 		TupleQueryResult result = query.evaluate();
+		
 		while (result.hasNext()) 
 		{
 			BindingSet bindingSet = result.next();
@@ -534,21 +576,25 @@ public class MedicalTriage
 			IRI patientIRI = (IRI) bindingSet.getBinding("p").getValue();
 			Literal scoreLiteral = (Literal) bindingSet.getBinding("s").getValue();
 			int previousScore = scoreLiteral.intValue();
-			//System.out.println(patientIRI);
 			
 			this.connection.remove(patientIRI, factory.createIRI("http://MedOntology.project.rdfs/TEWStriage#TEWSscore"), scoreLiteral);
 			this.connection
 				.add(patientIRI, factory.createIRI("http://MedOntology.project.rdfs/TEWStriage#TEWSscore"), factory.createLiteral(previousScore+num));
-			/**builder.subject(patientIRI).add("TEWStriage:TEWSscore", factory.createLiteral(previousScore+num));
-			
-			Model model = builder.build();
-			this.connection.add(model);*/
 		}
 		
 		result.close();
 	}
 	
 	
+	/**
+	 * The main function of the programm that calls all the other necessary functions in the proper order, 
+	 * to recreate the proccess of the TEWS triage. Which includes the TEWS score calculation and the 
+	 * seperation of the patients into the TEWS colour code classes that they belong.
+	 * @throws RDFParseException
+	 * @throws UnsupportedRDFormatException
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 */
 	public static void main(String[] args) throws RDFParseException, UnsupportedRDFormatException, IOException, URISyntaxException
 	{
 		// Access to a remote repository accessible over HTTP
