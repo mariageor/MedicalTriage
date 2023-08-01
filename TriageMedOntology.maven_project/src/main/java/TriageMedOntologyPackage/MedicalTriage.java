@@ -33,10 +33,15 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
 /**
- * This class is 
+ * This application represents the proccess of medical TEWS triage.
+ * Firstly, it loads an ontology and the rdf statetements of an instance
+ * into a GraphDB repository. Secondly, it reads a json file (PatientsData.json)
+ * containing the data of 15 new patients/victims and converts them into rdf statements. 
+ * Lastly, the reasoning is conducted through various SPARQL queries and the results
+ * are also converted into rdf statements and added to the GraphDB repository.
  * @author Maria-Georgia Georgiadou
  * @version 1.0
- * @since 2023-05-10
+ * @since 2023-04-10
  *
  */
 public class MedicalTriage 
@@ -57,8 +62,8 @@ public class MedicalTriage
 	
 	
 	/**
-	 * This function loads the ontology from the file TEWStriage.ttl and adds
-	 * it to the connection that has been made to the repository in GraphDB.
+	 * This function loads the ontology from the TEWStriage.ttl file and adds
+	 * it to the connection that has been made with the repository in GraphDB.
 	 * @throws RDFParseException
 	 * @throws RepositoryException
 	 * @throws IOException
@@ -75,9 +80,9 @@ public class MedicalTriage
 	
 	
 	/**
-	 * This function is loading new instances to the ontology from the file PatientsData.json.
-	 * In addition, it makes a model with all of the new triplets, which is added in  the 
-	 * connection to the GraphDB repository, conducting all the necessary checks.
+	 * This function is loading new instances to the ontology from the PatientsData.json file.
+	 * In addition, it creates a model with all of the new rdf triples, which is added in  the 
+	 * connection to the GraphDB repository, conducting at the same time all the necessary checks.
 	 * @throws IOException
 	 * @throws URISyntaxException
 	 */
@@ -121,6 +126,7 @@ public class MedicalTriage
 				    
 				if (!dead)
 				{	
+					// Handling the case of an alive patient and everything that is included
 					IRI vsIRI = factory.createIRI(namespace, "VSp" + (i+1)); 
 				    IRI AVPUstateIRI = factory.createIRI(namespace, "AVPUstate" + (i+1));
 					
@@ -170,6 +176,7 @@ public class MedicalTriage
 				}
 				else
 				{
+					// Handling the case of a dead patient
 					builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:Patient"))
 							.add(RDF.TYPE, factory.createIRI(namespace,sexOfPatient.getAsString()))
 							.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
@@ -178,7 +185,7 @@ public class MedicalTriage
 				
 			}
 			
-			// Constructing the new model and adding it to the connection to the GraphDB repository
+			// Constructing the new model and adding it to the connection with the GraphDB repository
 			Model model = builder.build();
 			this.connection.add(model);
 		    
@@ -215,7 +222,7 @@ public class MedicalTriage
 	
 	/**
 	 * This function provides the number of the dead 
-	 * patients through the appropriate SPARQL query.
+	 * patients/victims through the appropriate SPARQL query.
 	 */
 	public void SPARQLnumberOfDeathsQuery()
 	{
@@ -247,7 +254,7 @@ public class MedicalTriage
 	
 	/**
 	 * This function is using the appropriate SPARQL query to provide and print out 
-	 * the total number of patients, that belong in every TEWS colour code. 
+	 * the total number of patients, that belong in each TEWS colour code. 
 	 */
 	public void SPARQLtewsColourCodesQuery()
 	{
@@ -294,7 +301,7 @@ public class MedicalTriage
 	
 	
 	/**
-	 * This function provides the number of the stretchers tha are needed 
+	 * This function provides the number of the stretchers that are needed 
 	 * in the field of the mass disaster, in order to help the immobile patients,
 	 * through the appropriate SPARQL query.
 	 */
@@ -327,7 +334,7 @@ public class MedicalTriage
 	
 	
 	/**
-	 * In this function are constructed all the triples about the TEWS codes 
+	 * In this function are constructed all the rdf triples about the TEWS codes 
 	 * of the patinets, through a SPARQL query and all the other necessary actions. 
 	 */
 	public void constructionOfTEWScolourSPARQLqueries()
@@ -386,8 +393,8 @@ public class MedicalTriage
 	 * @param factory the SimpleValueFactory object that creates the IRIs
 	 * @param model the model object
 	 * @param colour the string that indicates the TEWS colour code 
-	 * @param l1 the first limit of the expression that is used
-	 * @param l2 the second limit that is used
+	 * @param l1 the first limit of the mathematical expression that is used
+	 * @param l2 the second limit of the mathematical expression that is used
 	 */
 	public void ColourCodes(ModelBuilder builder, SimpleValueFactory factory, Model model, String colour, Integer l1, Integer l2)
 	{
@@ -435,14 +442,17 @@ public class MedicalTriage
 		// Generating an instance of RDF value 
 		SimpleValueFactory factory = SimpleValueFactory.getInstance();
 		
+		// SPARQL queries about the AVPU state of patient
 		scoreCalculationForAVPU(builder, factory, "Verbal", 1);
 		scoreCalculationForAVPU(builder, factory, "Pain", 2);
 		scoreCalculationForAVPU(builder, factory, "Unresponsive", 3);
 		
+		// SPARQL queries about the existence of trauma or the ability of mobility of each patient
 		scoreCalculationsForMobilityAndTrauma(builder, factory, "stretcherNeededOrImmobilePatient", 2);
 		scoreCalculationsForMobilityAndTrauma(builder, factory, "needsHelpToWalk", 1);
 		scoreCalculationsForMobilityAndTrauma(builder, factory, "existenceOfTrauma", 1);
 		
+		//SPARQL queries for the value of every vital sign of each patient
 		scoreCalculationForVS(builder, factory, "SBP", 1, "?x>=81 && ?x<=100");
 		scoreCalculationForVS(builder, factory, "SBP", 2, "?x>=71 && ?x<=80");
 		scoreCalculationForVS(builder, factory, "SBP", 2, "?x>199");
@@ -471,7 +481,7 @@ public class MedicalTriage
 	 * @param factory the SimpleValueFactory object that creates the IRIs
 	 * @param type the string that indicates the specific vital sign of the query
 	 * @param num the integer that should be added to the score, if the condition is met
-	 * @param condition the string with the condition that must be met 
+	 * @param condition the string with the mathematical expression that must be met 
 	 */
 	public void scoreCalculationForVS(ModelBuilder builder, SimpleValueFactory factory, String type, int num, String condition )
 	{
@@ -588,8 +598,8 @@ public class MedicalTriage
 	
 	/**
 	 * The main function of the programm that calls all the other necessary functions in the proper order, 
-	 * to recreate the proccess of the TEWS triage. Which includes the TEWS score calculation and the 
-	 * seperation of the patients into the TEWS colour code classes that they belong.
+	 * to recreate the proccess of the TEWS triage. More specifically, this includes the TEWS score calculation
+	 * and the seperation of the patients into the TEWS colour code classes that they belong.
 	 * @throws RDFParseException
 	 * @throws UnsupportedRDFormatException
 	 * @throws IOException
@@ -610,6 +620,7 @@ public class MedicalTriage
 		
 		try
 		{
+			// Loading of the ontology and the instances
 			medicalTriage.loadOntology();
 			medicalTriage.loadInstances();
 			connection.commit();
