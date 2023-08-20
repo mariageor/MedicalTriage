@@ -34,8 +34,8 @@ import com.google.gson.stream.JsonReader;
 
 /**
  * This application represents the proccess of medical TEWS triage.
- * Firstly, it loads an ontology and the rdf statetements of an instance
- * into a GraphDB repository. Secondly, it reads a json file (PatientsData.json)
+ * At first, it loads an ontology and the rdf statetements of an instance
+ * into a GraphDB repository. Then, it reads a json file (PatientsData.json)
  * containing the data of 15 new patients/victims and converts them into rdf statements. 
  * Lastly, the reasoning is conducted through various SPARQL queries and the results
  * are also converted into rdf statements and added to the GraphDB repository.
@@ -123,6 +123,8 @@ public class MedicalTriage
 				Boolean dead = deadPatient.getAsBoolean();
 				
 				JsonElement sexOfPatient = patient.get("type");
+				
+				JsonElement age = patient.get("ageOfPatient");
 				    
 				if (!dead)
 				{	
@@ -143,8 +145,6 @@ public class MedicalTriage
 					JsonElement temp = VSdata.get("temperature");
 					    
 					JsonElement ableToWalk = patient.get("abilityOfMobility"); 
-					    
-					JsonElement age = patient.get("ageOfPatient");
 					    
 					JsonElement trauma = patient.get("existenceOfTrauma");
 					    
@@ -180,7 +180,8 @@ public class MedicalTriage
 					builder.subject(patientsIRI).add(RDF.TYPE, factory.createIRI("TEWStriage:Patient"))
 							.add(RDF.TYPE, factory.createIRI(namespace,sexOfPatient.getAsString()))
 							.add("TEWStriage:deadPatient", factory.createLiteral(deadPatient.getAsBoolean()))
-							.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()));
+							.add("TEWStriage:patientsName", factory.createLiteral(nameElement.getAsString()))
+							.add("TEWStriage:ageOfPatient", factory.createLiteral(age.getAsInt()));
 				}
 				
 			}
