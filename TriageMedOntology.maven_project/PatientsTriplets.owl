@@ -22,7 +22,7 @@
 	<TEWStriage:patientsName>Katerina Lagou</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate1"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp1"/>
-	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</TEWStriage:TEWSscore>
+	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:abilityOfMobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">24</TEWStriage:ageOfPatient>
@@ -57,7 +57,7 @@
 	<TEWStriage:patientsName>Ioanna Papakiriazi</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate3"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp3"/>
-	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</TEWStriage:TEWSscore>
+	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:abilityOfMobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">21</TEWStriage:ageOfPatient>
@@ -100,7 +100,7 @@
 	<TEWStriage:patientsName>Anastasios Gogos</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate6"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp6"/>
-	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</TEWStriage:TEWSscore>
+	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">21</TEWStriage:ageOfPatient>
@@ -127,7 +127,7 @@
 	<TEWStriage:patientsName>Panagiotis Ioakim</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate7"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp7"/>
-	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4</TEWStriage:TEWSscore>
+	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:abilityOfMobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">16</TEWStriage:ageOfPatient>
@@ -154,7 +154,7 @@
 	<TEWStriage:patientsName>Orestis Makris</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate8"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp8"/>
-	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4</TEWStriage:TEWSscore>
+	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:abilityOfMobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">31</TEWStriage:ageOfPatient>
@@ -181,7 +181,7 @@
 	<TEWStriage:patientsName>Maria Atzaraki</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate9"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp9"/>
-	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">3</TEWStriage:TEWSscore>
+	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">46</TEWStriage:ageOfPatient>
@@ -208,7 +208,7 @@
 	<TEWStriage:patientsName>Andreas Nikolaou</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate10"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp10"/>
-	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</TEWStriage:TEWSscore>
+	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">64</TEWStriage:ageOfPatient>
@@ -235,7 +235,7 @@
 	<TEWStriage:patientsName>Kiriakos Spanos</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate11"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp11"/>
-	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">6</TEWStriage:TEWSscore>
+	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">28</TEWStriage:ageOfPatient>
@@ -262,7 +262,7 @@
 	<TEWStriage:patientsName>Danai Pappa</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate12"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp12"/>
-	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</TEWStriage:TEWSscore>
+	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">50</TEWStriage:ageOfPatient>
@@ -289,7 +289,7 @@
 	<TEWStriage:patientsName>Stylianos Keimalis</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate13"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp13"/>
-	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">7</TEWStriage:TEWSscore>
+	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">67</TEWStriage:ageOfPatient>
@@ -316,7 +316,7 @@
 	<TEWStriage:patientsName>Irida Karipidi</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate14"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp14"/>
-	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">7</TEWStriage:TEWSscore>
+	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">42</TEWStriage:ageOfPatient>
@@ -343,7 +343,7 @@
 	<TEWStriage:patientsName>Leonidas Thanou</TEWStriage:patientsName>
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate15"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp15"/>
-	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">8</TEWStriage:TEWSscore>
+	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
 	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">38</TEWStriage:ageOfPatient>
