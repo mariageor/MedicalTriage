@@ -1,0 +1,271 @@
+{
+  "patientsData": [
+    {
+      "type": "FemalePatient",
+      "AVPUstateOfPatient": {
+        "type": "Awake"
+      },
+      "TEWSscore": 0,
+      "abilityOfMobility": true,
+      "ageOfPatient": 24,
+      "deadPatient": false,
+      "existenceOfTrauma": false,
+      "needsHelpToWalk": false,
+      "patientsName": "Katerina Lagou",
+      "stretcherNeededOrImmobilePatient": false,
+      "VitalSignsOfPatient": {
+        "type": "VitalSigns",
+        "HR": 60,
+        "RR": 18,
+        "SBP": 120,
+        "temperature": 36.2
+      }
+    },
+    {
+      "type": "FemalePatient",
+      "deadPatient": true,
+      "patientsName": "Kiriaki Vordou"
+    },
+    {
+      "type": "FemalePatient",
+      "AVPUstateOfPatient": {
+        "type": "Awake"
+      },
+      "TEWSscore": 0,
+      "abilityOfMobility": true,
+      "ageOfPatient": 21,
+      "deadPatient": false,
+      "existenceOfTrauma": true,
+      "needsHelpToWalk": false,
+      "patientsName": "Ioanna Papakiriazi",
+      "stretcherNeededOrImmobilePatient": false,
+      "VitalSignsOfPatient": {
+        "type": "VitalSigns",
+        "HR": 107,
+        "RR": 12,
+        "SBP": 130,
+        "temperature": 36
+      }
+    },
+    {
+      "type": "FemalePatient",
+      "deadPatient": true,
+      "patientsName": "Eleonora Varsami"
+    },
+    {
+      "type": "MalePatient",
+      "deadPatient": true,
+      "patientsName": "Konstantinos Zervas"
+    },
+    {
+      "type": "MalePatient",
+      "AVPUstateOfPatient": {
+        "type": "Awake"
+      },
+      "TEWSscore": 0,
+      "abilityOfMobility": false,
+      "ageOfPatient": 21,
+      "deadPatient": false,
+      "existenceOfTrauma": true,
+      "needsHelpToWalk": true,
+      "patientsName": "Anastasios Gogos",
+      "stretcherNeededOrImmobilePatient": false,
+      "VitalSignsOfPatient": {
+        "type": "VitalSigns",
+        "HR": 72,
+        "RR": 11,
+        "SBP": 180,
+        "temperature": 37.3
+      }
+    },
+    {
+      "type": "MalePatient",
+      "AVPUstateOfPatient": {
+        "type": "Awake"
+      },
+      "TEWSscore": 0,
+      "abilityOfMobility": true,
+      "ageOfPatient": 16,
+      "deadPatient": false,
+      "existenceOfTrauma": false,
+      "needsHelpToWalk": false,
+      "patientsName": "Panagiotis Ioakim",
+      "stretcherNeededOrImmobilePatient": false,
+      "VitalSignsOfPatient": {
+        "type": "VitalSigns",
+        "HR": 108,
+        "RR": 19,
+        "SBP": 202,
+        "temperature": 35.8
+      }
+    },
+    {
+      "type": "MalePatient",
+      "AVPUstateOfPatient": {
+        "type": "Awake"
+      },
+      "TEWSscore": 0,
+      "abilityOfMobility": true,
+      "ageOfPatient": 31,
+      "deadPatient": false,
+      "existenceOfTrauma": false,
+      "needsHelpToWalk": false,
+      "patientsName": "Orestis Makris",
+      "stretcherNeededOrImmobilePatient": false,
+      "VitalSignsOfPatient": {
+        "type": "VitalSigns",
+        "HR": 109,
+        "RR": 35,
+        "SBP": 167,
+        "temperature": 35.2
+      }
+    },
+    {
+      "type": "FemalePatient",
+      "AVPUstateOfPatient": {
+        "type": "Verbal"
+      },
+      "TEWSscore": 0,
+      "abilityOfMobility": false,
+      "ageOfPatient": 46,
+      "deadPatient": false,
+      "existenceOfTrauma": false,
+      "needsHelpToWalk": false,
+      "patientsName": "Maria Atzaraki",
+      "stretcherNeededOrImmobilePatient": true,
+      "VitalSignsOfPatient": {
+        "type": "VitalSigns",
+        "HR": 90,
+        "RR": 10,
+        "SBP": 196,
+        "temperature": 36.1
+      }
+    },
+    {
+      "type": "MalePatient",
+      "AVPUstateOfPatient": {
+        "type": "Pain"
+      },
+      "TEWSscore": 0,
+      "abilityOfMobility": false,
+      "ageOfPatient": 64,
+      "deadPatient": false,
+      "existenceOfTrauma": true,
+      "needsHelpToWalk": false,
+      "patientsName": "Andreas Nikolaou",
+      "stretcherNeededOrImmobilePatient": true,
+      "VitalSignsOfPatient": {
+        "type": "VitalSigns",
+        "HR": 78,
+        "RR": 11,
+        "SBP": 158,
+        "temperature": 36.7
+      }
+    },
+    {
+      "type": "MalePatient",
+      "AVPUstateOfPatient": {
+        "type": "Unresponsive"
+      },
+      "TEWSscore": 0,
+      "abilityOfMobility": false,
+      "ageOfPatient": 28,
+      "deadPatient": false,
+      "existenceOfTrauma": false,
+      "needsHelpToWalk": false,
+      "patientsName": "Kiriakos Spanos",
+      "stretcherNeededOrImmobilePatient": true,
+      "VitalSignsOfPatient": {
+        "type": "VitalSigns",
+        "HR": 79,
+        "RR": 13,
+        "SBP": 95,
+        "temperature": 35
+      }
+    },
+    {
+      "type": "FemalePatient",
+      "AVPUstateOfPatient": {
+        "type": "Awake"
+      },
+      "TEWSscore": 0,
+      "abilityOfMobility": false,
+      "ageOfPatient": 50,
+      "deadPatient": false,
+      "existenceOfTrauma": false,
+      "needsHelpToWalk": true,
+      "patientsName": "Danai Pappa",
+      "stretcherNeededOrImmobilePatient": false,
+      "VitalSignsOfPatient": {
+        "type": "VitalSigns",
+        "HR": 123,
+        "RR": 28,
+        "SBP": 198,
+        "temperature": 36.8
+      }
+    },
+    {
+      "type": "MalePatient",
+      "AVPUstateOfPatient": {
+        "type": "Pain"
+      },
+      "TEWSscore": 0,
+      "abilityOfMobility": false,
+      "ageOfPatient": 67,
+      "deadPatient": false,
+      "existenceOfTrauma": true,
+      "needsHelpToWalk": false,
+      "patientsName": "Stylianos Keimalis",
+      "stretcherNeededOrImmobilePatient": true,
+      "VitalSignsOfPatient": {
+        "type": "VitalSigns",
+        "HR": 100,
+        "RR": 14,
+        "SBP": 195,
+        "temperature": 38.9
+      }
+    },
+    {
+      "type": "FemalePatient",
+      "AVPUstateOfPatient": {
+        "type": "Awake"
+      },
+      "TEWSscore": 0,
+      "abilityOfMobility": false,
+      "ageOfPatient": 42,
+      "deadPatient": false,
+      "existenceOfTrauma": false,
+      "needsHelpToWalk": true,
+      "patientsName": "Irida Karipidi",
+      "stretcherNeededOrImmobilePatient": false,
+      "VitalSignsOfPatient": {
+        "type": "VitalSigns",
+        "HR": 129,
+        "RR": 29,
+        "SBP": 203,
+        "temperature": 37.9
+      }
+    },
+    {
+      "type": "MalePatient",
+      "AVPUstateOfPatient": {
+        "type": "Unresponsive"
+      },
+      "TEWSscore": 0,
+      "abilityOfMobility": false,
+      "ageOfPatient": 38,
+      "deadPatient": false,
+      "existenceOfTrauma": true,
+      "needsHelpToWalk": false,
+      "patientsName": "Leonidas Thanou",
+      "stretcherNeededOrImmobilePatient": true,
+      "VitalSignsOfPatient": {
+        "type": "VitalSigns",
+        "HR": 108,
+        "RR": 20,
+        "SBP": 199,
+        "temperature": 36.5
+      }
+    }
+  ]
+}
