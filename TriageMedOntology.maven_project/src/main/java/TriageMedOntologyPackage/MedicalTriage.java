@@ -144,7 +144,7 @@ public class MedicalTriage
 					JsonElement SBP = VSdata.get("SBP");
 					JsonElement temp = VSdata.get("temperature");
 					    
-					JsonElement ableToWalk = patient.get("abilityOfMobility"); 
+					JsonElement ableToWalk = patient.get("mobility"); 
 					    
 					JsonElement trauma = patient.get("existenceOfTrauma");
 					    
@@ -168,7 +168,7 @@ public class MedicalTriage
 							.add("TEWStriage:AVPUstateOfPatient", AVPUstateIRI)
 							.add("TEWStriage:vitalSignsOfPatient", vsIRI) 
 							.add("TEWStriage:TEWSscore", factory.createLiteral(tewsScore.getAsInt()))
-							.add("TEWStriage:abilityOfMobility", factory.createLiteral(ableToWalk.getAsBoolean()))
+							.add("TEWStriage:mobility", factory.createLiteral(ableToWalk.getAsBoolean()))
 							.add("TEWStriage:existenceOfTrauma", factory.createLiteral(trauma.getAsBoolean()))
 							.add("TEWStriage:ageOfPatient", factory.createLiteral(age.getAsInt()))
 							.add("TEWStriage:needsHelpToWalk", factory.createLiteral(needsHelpToWalk.getAsBoolean()))

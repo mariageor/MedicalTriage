@@ -23,7 +23,7 @@
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate1"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp1"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
-	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:abilityOfMobility>
+	<TEWStriage:mobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:mobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">24</TEWStriage:ageOfPatient>
 	<TEWStriage:needsHelpToWalk rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:needsHelpToWalk>
@@ -58,7 +58,7 @@
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate3"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp3"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
-	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:abilityOfMobility>
+	<TEWStriage:mobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:mobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">21</TEWStriage:ageOfPatient>
 	<TEWStriage:needsHelpToWalk rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:needsHelpToWalk>
@@ -101,7 +101,7 @@
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate6"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp6"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
-	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
+	<TEWStriage:mobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:mobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">21</TEWStriage:ageOfPatient>
 	<TEWStriage:needsHelpToWalk rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:needsHelpToWalk>
@@ -128,7 +128,7 @@
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate7"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp7"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
-	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:abilityOfMobility>
+	<TEWStriage:mobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:mobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">16</TEWStriage:ageOfPatient>
 	<TEWStriage:needsHelpToWalk rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:needsHelpToWalk>
@@ -155,7 +155,7 @@
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate8"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp8"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
-	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:abilityOfMobility>
+	<TEWStriage:mobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:mobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">31</TEWStriage:ageOfPatient>
 	<TEWStriage:needsHelpToWalk rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:needsHelpToWalk>
@@ -182,7 +182,7 @@
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate9"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp9"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
-	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
+	<TEWStriage:mobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:mobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">46</TEWStriage:ageOfPatient>
 	<TEWStriage:needsHelpToWalk rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:needsHelpToWalk>
@@ -209,7 +209,7 @@
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate10"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp10"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
-	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
+	<TEWStriage:mobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:mobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">64</TEWStriage:ageOfPatient>
 	<TEWStriage:needsHelpToWalk rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:needsHelpToWalk>
@@ -236,7 +236,7 @@
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate11"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp11"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
-	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
+	<TEWStriage:mobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:mobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">28</TEWStriage:ageOfPatient>
 	<TEWStriage:needsHelpToWalk rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:needsHelpToWalk>
@@ -263,7 +263,7 @@
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate12"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp12"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
-	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
+	<TEWStriage:mobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:mobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">50</TEWStriage:ageOfPatient>
 	<TEWStriage:needsHelpToWalk rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:needsHelpToWalk>
@@ -290,7 +290,7 @@
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate13"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp13"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
-	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
+	<TEWStriage:mobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:mobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">67</TEWStriage:ageOfPatient>
 	<TEWStriage:needsHelpToWalk rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:needsHelpToWalk>
@@ -317,7 +317,7 @@
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate14"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp14"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
-	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
+	<TEWStriage:mobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:mobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">42</TEWStriage:ageOfPatient>
 	<TEWStriage:needsHelpToWalk rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:needsHelpToWalk>
@@ -344,7 +344,7 @@
 	<TEWStriage:AVPUstateOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#AVPUstate15"/>
 	<TEWStriage:vitalSignsOfPatient rdf:resource="http://MedOntology.project.rdfs/TEWStriage#VSp15"/>
 	<TEWStriage:TEWSscore rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</TEWStriage:TEWSscore>
-	<TEWStriage:abilityOfMobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:abilityOfMobility>
+	<TEWStriage:mobility rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:mobility>
 	<TEWStriage:existenceOfTrauma rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</TEWStriage:existenceOfTrauma>
 	<TEWStriage:ageOfPatient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">38</TEWStriage:ageOfPatient>
 	<TEWStriage:needsHelpToWalk rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</TEWStriage:needsHelpToWalk>
