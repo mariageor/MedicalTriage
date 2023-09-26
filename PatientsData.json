@@ -6,7 +6,7 @@
         "type": "Awake"
       },
       "TEWSscore": 0,
-      "abilityOfMobility": true,
+      "mobility": true,
       "ageOfPatient": 24,
       "deadPatient": false,
       "existenceOfTrauma": false,
@@ -32,7 +32,7 @@
         "type": "Awake"
       },
       "TEWSscore": 0,
-      "abilityOfMobility": true,
+      "mobility": true,
       "ageOfPatient": 21,
       "deadPatient": false,
       "existenceOfTrauma": true,
@@ -63,7 +63,7 @@
         "type": "Awake"
       },
       "TEWSscore": 0,
-      "abilityOfMobility": false,
+      "mobility": false,
       "ageOfPatient": 21,
       "deadPatient": false,
       "existenceOfTrauma": true,
@@ -84,7 +84,7 @@
         "type": "Awake"
       },
       "TEWSscore": 0,
-      "abilityOfMobility": true,
+      "mobility": true,
       "ageOfPatient": 16,
       "deadPatient": false,
       "existenceOfTrauma": false,
@@ -105,7 +105,7 @@
         "type": "Awake"
       },
       "TEWSscore": 0,
-      "abilityOfMobility": true,
+      "mobility": true,
       "ageOfPatient": 31,
       "deadPatient": false,
       "existenceOfTrauma": false,
@@ -126,7 +126,7 @@
         "type": "Verbal"
       },
       "TEWSscore": 0,
-      "abilityOfMobility": false,
+      "mobility": false,
       "ageOfPatient": 46,
       "deadPatient": false,
       "existenceOfTrauma": false,
@@ -147,7 +147,7 @@
         "type": "Pain"
       },
       "TEWSscore": 0,
-      "abilityOfMobility": false,
+      "mobility": false,
       "ageOfPatient": 64,
       "deadPatient": false,
       "existenceOfTrauma": true,
@@ -168,7 +168,7 @@
         "type": "Unresponsive"
       },
       "TEWSscore": 0,
-      "abilityOfMobility": false,
+      "mobility": false,
       "ageOfPatient": 28,
       "deadPatient": false,
       "existenceOfTrauma": false,
@@ -189,7 +189,7 @@
         "type": "Awake"
       },
       "TEWSscore": 0,
-      "abilityOfMobility": false,
+      "mobility": false,
       "ageOfPatient": 50,
       "deadPatient": false,
       "existenceOfTrauma": false,
@@ -210,7 +210,7 @@
         "type": "Pain"
       },
       "TEWSscore": 0,
-      "abilityOfMobility": false,
+      "mobility": false,
       "ageOfPatient": 67,
       "deadPatient": false,
       "existenceOfTrauma": true,
@@ -231,7 +231,7 @@
         "type": "Awake"
       },
       "TEWSscore": 0,
-      "abilityOfMobility": false,
+      "mobility": false,
       "ageOfPatient": 42,
       "deadPatient": false,
       "existenceOfTrauma": false,
@@ -252,7 +252,7 @@
         "type": "Unresponsive"
       },
       "TEWSscore": 0,
-      "abilityOfMobility": false,
+      "mobility": false,
       "ageOfPatient": 38,
       "deadPatient": false,
       "existenceOfTrauma": true,
