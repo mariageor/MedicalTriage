@@ -139,12 +139,6 @@ TEWStriage:Yellow
   rdfs:label "This class respresents colour code Yellow of TEWS, which indicates that the patient is potentially unstable and needs to be treated by a physician in less than 60 minutes/1 hour." ;
   rdfs:subClassOf TEWStriage:TEWScolourCodes ;
 .
-TEWStriage:abilityOfMobility
-  rdf:type rdf:Property ;
-  rdfs:domain TEWStriage:Patient ;
-  rdfs:label "This property represents the patients ability of mobility." ;
-  rdfs:range xsd:boolean ;
-.
 TEWStriage:ageOfPatient
   rdf:type rdf:Property ;
   rdfs:domain TEWStriage:Patient ;
@@ -165,21 +159,26 @@ TEWStriage:existenceOfTrauma
   rdfs:label "This property indicates a trauma to a patient." ;
   rdfs:range xsd:boolean ;
 .
+TEWStriage:mobility
+  rdf:type rdf:Property ;
+  rdfs:domain TEWStriage:Patient ;
+  rdfs:label "This property represents the patients ability of mobility." ;
+  rdfs:range xsd:boolean ;
+.
 TEWStriage:needsHelpToWalk
   rdf:type rdf:Property ;
   rdfs:domain TEWStriage:Patient ;
   rdfs:label "This property represents the ability of a patient to walk only with help." ;
   rdfs:range xsd:boolean ;
-  rdfs:subPropertyOf TEWStriage:abilityOfMobility ;
 .
 TEWStriage:p0
   rdf:type TEWStriage:FemalePatient ;
   TEWStriage:AVPUstateOfPatient TEWStriage:awake_p0 ;
   TEWStriage:TEWSscore 1 ;
-  TEWStriage:abilityOfMobility "true"^^xsd:boolean ;
   TEWStriage:ageOfPatient 21 ;
   TEWStriage:deadPatient "false"^^xsd:boolean ;
   TEWStriage:existenceOfTrauma "false"^^xsd:boolean ;
+  TEWStriage:mobility "true"^^xsd:boolean ;
   TEWStriage:needsHelpToWalk "false"^^xsd:boolean ;
   TEWStriage:patientsName "Maria Papanikolaou" ;
   TEWStriage:stretcherNeededOrImmobilePatient "false"^^xsd:boolean ;
@@ -196,7 +195,6 @@ TEWStriage:stretcherNeededOrImmobilePatient
   rdfs:domain TEWStriage:Patient ;
   rdfs:label "This property represents the inability of a patient to walk on his own, and that he needs a stretcher to be trasfered." ;
   rdfs:range xsd:boolean ;
-  rdfs:subPropertyOf TEWStriage:abilityOfMobility ;
 .
 TEWStriage:temperature
   rdf:type rdf:Property ;
