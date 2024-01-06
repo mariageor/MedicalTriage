@@ -1,5 +1,6 @@
 # MedicalTriage
 Technical Summary
+
 This application represents the proccess of medical TEWS triage.
 At first, it loads an ontology and the rdf statetements of an instance
 into a GraphDB repository. Then, it reads a json file (PatientsData.json)
@@ -8,6 +9,7 @@ Lastly, the reasoning is conducted through various SPARQL queries and the result
 are also converted into rdf statements and added to the GraphDB repository.
 
 Abstract
+
 The aim of this thesis is to develop a decision support tool for mass disaster 
 management. The purpose of this tool is to improve the situation awareness of the 
 medical/paramedical staff in the field of the disaster, so that they can make faster and 
